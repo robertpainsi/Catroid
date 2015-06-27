@@ -1,0 +1,240 @@
+options {
+	UNICODE_INPUT = true;
+	STATIC = false;
+}
+
+PARSER_BEGIN(SyntaxChecker)
+
+package org.catrobat.catroid.wrapper;
+
+import org.catrobat.catroid.formulaeditor.Formula;
+import org.catrobat.catroid.formulaeditor.FormulaElement;
+import org.catrobat.catroid.formulaeditor.Functions;
+import org.catrobat.catroid.formulaeditor.InternFormulaParser;
+import org.catrobat.catroid.formulaeditor.InternToken;
+import org.catrobat.catroid.formulaeditor.InternTokenType;
+import org.catrobat.catroid.formulaeditor.Operators;
+import org.catrobat.catroid.formulaeditor.Sensors;
+
+import android.util.Log;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+public class SyntaxChecker {
+
+	private static class Pair<F, S> {
+		private final F first;
+		private final S second;
+
+		public Pair(F first, S second) {
+			this.first = first;
+			this.second = second;
+		}
+	}
+
+	private static final Map<String, Pair<InternTokenType, String>> tokenMap =
+			new HashMap<String, Pair<InternTokenType, String>>();
+	static {
+
+		// Math
+		tokenMap.put("sin", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.SIN.name()));
+		tokenMap.put("cos", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.COS.name()));
+		tokenMap.put("tan", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.TAN.name()));
+		tokenMap.put("ln", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.LN.name()));
+		tokenMap.put("log", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.LOG.name()));
+		tokenMap.put("PI", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.PI.name()));
+		tokenMap.put("pi", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.PI.name()));
+		tokenMap.put("sqrt", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.SQRT.name()));
+		tokenMap.put("random", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.RAND.name()));
+		tokenMap.put("rand", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.RAND.name()));
+		tokenMap.put("abs", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.ABS.name()));
+		tokenMap.put("round", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.ROUND.name()));
+		tokenMap.put("mod", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.MOD.name()));
+		tokenMap.put("arcsin", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.ARCSIN.name()));
+		tokenMap.put("arccos", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.ARCCOS.name()));
+		tokenMap.put("arctan", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.ARCTAN.name()));
+		tokenMap.put("exp", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.EXP.name()));
+		tokenMap.put("max", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.MAX.name()));
+		tokenMap.put("min", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.MIN.name()));
+
+		tokenMap.put("length", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.LENGTH.name()));
+		tokenMap.put("number_of_items", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.NUMBER_OF_ITEMS.name()));
+		tokenMap.put("letter", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.LETTER.name()));
+		tokenMap.put("join", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.JOIN.name()));
+		tokenMap.put("element", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.LIST_ITEM.name()));
+		tokenMap.put("contains", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.CONTAINS.name()));
+
+		// Sensors
+		tokenMap.put("acceleration_x", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.X_ACCELERATION.name()));
+		tokenMap.put("acceleration_y", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.Y_ACCELERATION.name()));
+		tokenMap.put("acceleration_z", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.Z_ACCELERATION.name()));
+		tokenMap.put("compass_direction", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.COMPASS_DIRECTION.name()));
+		tokenMap.put("inclination_x", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.X_INCLINATION.name()));
+		tokenMap.put("inclination_y", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.Y_INCLINATION.name()));
+		tokenMap.put("loudness", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.LOUDNESS.name()));
+
+		// Object
+		tokenMap.put("position_x", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.OBJECT_X.name()));
+		tokenMap.put("position_y", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.OBJECT_Y.name()));
+		tokenMap.put("transparency", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.OBJECT_TRANSPARENCY.name()));
+		tokenMap.put("brightness", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.OBJECT_BRIGHTNESS.name()));
+		tokenMap.put("size", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.OBJECT_SIZE.name()));
+		tokenMap.put("direction", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.OBJECT_ROTATION.name()));
+		tokenMap.put("layer", new Pair<InternTokenType, String>(InternTokenType.SENSOR, Sensors.OBJECT_LAYER.name()));
+
+		// Logic
+		tokenMap.put("=", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.EQUAL.name()));
+		tokenMap.put("==", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.EQUAL.name()));
+		tokenMap.put("!=", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.NOT_EQUAL.name()));
+		tokenMap.put("<", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.SMALLER_THAN.name()));
+		tokenMap.put("<=", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.SMALLER_OR_EQUAL.name()));
+		tokenMap.put(">", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.GREATER_THAN.name()));
+		tokenMap.put(">=", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.GREATER_OR_EQUAL.name()));
+		tokenMap.put("AND", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.LOGICAL_AND.name()));
+		tokenMap.put("&", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.LOGICAL_AND.name()));
+		tokenMap.put("&&", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.LOGICAL_AND.name()));
+		tokenMap.put("OR", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.LOGICAL_OR.name()));
+		tokenMap.put("|", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.LOGICAL_OR.name()));
+		tokenMap.put("||", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.LOGICAL_OR.name()));
+		tokenMap.put("NOT", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.LOGICAL_NOT.name()));
+		tokenMap.put("!", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.LOGICAL_NOT.name()));
+		tokenMap.put("TRUE", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.TRUE.name()));
+		tokenMap.put("true", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.TRUE.name()));
+		tokenMap.put("FALSE", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.FALSE.name()));
+		tokenMap.put("false", new Pair<InternTokenType, String>(InternTokenType.FUNCTION_NAME, Functions.FALSE.name()));
+
+		// Operators
+		tokenMap.put("+", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.PLUS.name()));
+		tokenMap.put("-", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.MINUS.name()));
+		tokenMap.put("*", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.MULT.name()));
+		tokenMap.put("/", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.DIVIDE.name()));
+		tokenMap.put("^", new Pair<InternTokenType, String>(InternTokenType.OPERATOR, Operators.POW.name()));
+	}
+
+	public static void log(List<InternToken> tokens) {
+		String s = "";
+		for (InternToken t : tokens) {
+			s += t.toString();
+		}
+//		Log.e("PARSER", "InternFormula: " + s);
+	}
+
+	public static void addNumber(List<InternToken> tokens, Token number) {
+		tokens.add(new InternToken(InternTokenType.NUMBER, number.toString()));
+	}
+
+	public static void addToken(List<InternToken> tokens, Token token) {
+		String tokenImage = token.toString();
+		Pair<InternTokenType, String> x = tokenMap.get(tokenImage);
+		if (x == null) {
+			Log.e("PARSER", "Unknown token: " + tokenImage);
+		}
+		tokens.add(new InternToken(x.first, x.second));
+	}
+
+	public static void addVariable(List<InternToken> tokens, Token var) {
+		tokens.add(new InternToken(InternTokenType.USER_VARIABLE, var.toString()));
+	}
+
+	public static void addString(List<InternToken> tokens, Token string) {
+		tokens.add(new InternToken(InternTokenType.STRING, string.toString()));
+	}
+
+	public static void addList(List<InternToken> tokens, Token list) {
+		tokens.add(new InternToken(InternTokenType.USER_LIST, list.toString()));
+	}
+
+	public static void addBracketOpen(List<InternToken> tokens) {
+		tokens.add(new InternToken(InternTokenType.BRACKET_OPEN));
+	}
+
+	public static void addBracketClose(List<InternToken> tokens) {
+		tokens.add(new InternToken(InternTokenType.BRACKET_CLOSE));
+	}
+
+	public static void addFunctionBracketOpen(List<InternToken> tokens) {
+		tokens.add(new InternToken(InternTokenType.FUNCTION_PARAMETERS_BRACKET_OPEN));
+	}
+
+	public static void addFunctionBracketClose(List<InternToken> tokens) {
+		tokens.add(new InternToken(InternTokenType.FUNCTION_PARAMETERS_BRACKET_CLOSE));
+	}
+
+	public static void addFunctionDelimiter(List<InternToken> tokens) {
+		tokens.add(new InternToken(InternTokenType.FUNCTION_PARAMETER_DELIMITER));
+	}
+}
+
+PARSER_END(SyntaxChecker)
+
+SKIP:  { " " | "\t" | "\n" | "\r" }
+
+TOKEN: { <NUM: (["0"-"9"])+ ("."(["0"-"9"])+)?> }
+TOKEN: { <OP: ("AND" | "&&" | "&" | "OR" | "||" | "|" | "==" | "=" | "NOT" | "!=" | "<=" | ">=" | "<" | ">" | "+" | "-" | "*" | "/" | "^" | "!")> }
+TOKEN: { <FU: ("sin" | "cos" | "tan" | "ln" | "log" | "sqrt" | "round" | "abs" | "arcsin" | "arccos" | "arctan" | "rand" | "random" | "mod" | "exp" | "max" | "min" | "length" | "number_of_items" | "letter" | "join" | "element" | "contains")> }
+TOKEN: { <CONST: ("PI" | "pi" | "TRUE" | "true" | "FALSE" | "false")> }
+TOKEN: { <SENSOR: ("acceleration_x" | "acceleration_y" | "acceleration_z" | "compass_direction" | "inclination_x" | "inclination_y" | "loudness" | "position_x" | "position_y" | "transparency" | "brightness" | "size" | "direction" | "layer" | "x_velocity" | "y_velocity" | "angular_velocity")> }
+TOKEN: { <STRING: (["A"-"Z"]|["a"-"z"]|["0"-"9"]|"_")+> }
+
+Formula parse(): {
+	List<InternToken> tokens = new LinkedList<InternToken>();
+} {
+	E(tokens) <EOF> {
+		InternFormulaParser internParser = new InternFormulaParser(tokens);
+		SyntaxChecker.log(tokens);
+		return new Formula(internParser.parseFormula());
+	}
+}
+
+void E(List<InternToken> tokens): {
+	Token t;
+} {
+	t = <NUM> { SyntaxChecker.addNumber(tokens, t); } R(tokens)
+|
+	t = <SENSOR> { SyntaxChecker.addToken(tokens, t); } R(tokens)
+|
+	t = <CONST> { SyntaxChecker.addToken(tokens, t); } R(tokens)
+|
+	"{"
+	(t = <NUM> | t = <STRING>) { SyntaxChecker.addVariable(tokens, t); }
+	"}" R(tokens)
+|
+	"'"
+	(t = <NUM> | t = <STRING>) { SyntaxChecker.addString(tokens, t); }
+	"'" R(tokens)
+|
+	"["
+	(t = <NUM> | t = <STRING>) { SyntaxChecker.addList(tokens, t); }
+	"]" R(tokens)
+|
+	t = <OP> { SyntaxChecker.addToken(tokens, t); }
+	E(tokens)
+	R(tokens)
+|
+	t = <FU> { SyntaxChecker.addToken(tokens, t); }
+	"(" { SyntaxChecker.addFunctionBracketOpen(tokens); }
+	E(tokens)
+	(
+		"," { SyntaxChecker.addFunctionDelimiter(tokens); }
+		E(tokens)
+	)?
+	")" { SyntaxChecker.addFunctionBracketClose(tokens); }
+	R(tokens)
+|
+	"(" { SyntaxChecker.addBracketOpen(tokens); }
+	E(tokens)
+	")" { SyntaxChecker.addBracketClose(tokens); }
+	R(tokens)
+}
+
+void R(List<InternToken> tokens): {
+	Token t;
+} {
+	t = <OP> { SyntaxChecker.addToken(tokens, t); }
+	E(tokens)
+|
+	{}
+}
