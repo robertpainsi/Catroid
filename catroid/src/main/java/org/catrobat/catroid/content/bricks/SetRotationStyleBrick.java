@@ -50,6 +50,10 @@ public class SetRotationStyleBrick extends BrickBaseType {
 	public SetRotationStyleBrick() {
 	}
 
+	public void setSelection(int selection) {
+		this.selection = selection;
+	}
+
 	@Override
 	public int getRequiredResources() {
 		return NO_RESOURCES;

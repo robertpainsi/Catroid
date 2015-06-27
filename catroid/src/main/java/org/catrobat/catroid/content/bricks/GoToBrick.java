@@ -314,6 +314,10 @@ public class GoToBrick extends BrickBaseType {
 		this.destinationSprite = destinationSprite;
 	}
 
+	public void setSpinnerSelection(int selection) {
+		this.spinnerSelection = selection;
+	}
+
 	@Override
 	public void storeDataForBackPack(Sprite sprite) {
 		Sprite spriteToRestore = ProjectManager.getInstance().getCurrentSprite();

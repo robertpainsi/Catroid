@@ -82,7 +82,7 @@ public class BaseActivityInstrumentationRule<T extends Activity> extends Activit
 	void setUpTestProjectFolder() {
 		Reflection.setPrivateField(StageListener.class, "checkIfAutomaticScreenshotShouldBeTaken", false);
 		Reflection.setPrivateField(Constants.class, "DEFAULT_ROOT", Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/Pocket Code uiTest");
+				.getAbsolutePath() + "/Pocket Code");
 		File uiTestFolder = new File(Constants.DEFAULT_ROOT);
 		if (uiTestFolder.exists()) {
 			deleteRecursive(uiTestFolder);
