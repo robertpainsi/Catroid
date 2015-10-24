@@ -99,7 +99,6 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 		LoaderManager.LoaderCallbacks<Cursor>, Dialog.OnKeyListener {
 
 	public static final String TAG = LookFragment.class.getSimpleName();
-	public Intent lastRecivedIntent = null;
 	private static int selectedLookPosition = Constants.NO_POSITION;
 	private static String actionModeTitle;
 	private static String singleItemAppendixActionMode;
@@ -407,7 +406,6 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		lastRecivedIntent = data;
 		if (resultCode == Activity.RESULT_OK) {
 			switch (requestCode) {
 				case LookController.REQUEST_SELECT_OR_DRAW_IMAGE:
@@ -710,7 +708,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 		sendPocketPaintIntent(position, intent);
 	}
 
-	public void sendPocketPaintIntent(int selectedPosition, Intent intent) {
+	private void sendPocketPaintIntent(int selectedPosition, Intent intent) {
 
 		if (!LookController.getInstance().checkIfPocketPaintIsInstalled(intent, getActivity())) {
 			return;
@@ -733,9 +731,9 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 			startActivityForResult(intent, LookController.REQUEST_POCKET_PAINT_EDIT_IMAGE);
 		} catch (IOException ioException) {
 			Log.e(TAG, Log.getStackTraceString(ioException));
-		} catch (NullPointerException nullPointerException) {
-			Log.e(TAG, Log.getStackTraceString(nullPointerException));
+		} catch (IllegalArgumentException illegalArgumentException) {
 			ToastUtil.showError(getActivity(), R.string.error_load_image);
+			Log.e(TAG, Log.getStackTraceString(illegalArgumentException));
 		}
 	}
 

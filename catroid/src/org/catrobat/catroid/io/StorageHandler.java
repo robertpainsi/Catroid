@@ -646,24 +646,19 @@ public final class StorageHandler {
 		}
 	}
 
-	public File makeTempImageCopy(String inputFilePath) throws IOException {
-		File tempDirectory = new File(Constants.TMP_PATH);
-
+	public File makeTempImageCopy(String inputFilePath) throws IOException, IllegalArgumentException {
 		File inputFile = new File(inputFilePath);
 		if (!inputFile.exists() || !inputFile.canRead()) {
-			return null;
+			throw new IllegalArgumentException("File doesn't exists");
 		}
 
-		File outputFileDirectory = new File(tempDirectory.getAbsolutePath());
+		File outputFile = new File(Constants.TMP_IMAGE_PATH);
+		File outputFileDirectory = outputFile.getParentFile();
 		if (!outputFileDirectory.exists()) {
 			outputFileDirectory.mkdirs();
 		}
 
-		File outputFile = new File(Constants.TMP_IMAGE_PATH);
-
-		File copiedFile = UtilFile.copyFile(outputFile, inputFile);
-
-		return copiedFile;
+		return UtilFile.copyFile(outputFile, inputFile);
 	}
 
 	public void deleteTempImageCopy() {
