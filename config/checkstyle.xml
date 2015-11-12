@@ -139,6 +139,12 @@
       <message key="name.invalidPattern" value="Method type parameter not following naming convention - Name ''{0}'' must match pattern ''{1}''." />
     </module>
     <module name="MethodName">
+      <property name="id" value="production_only" />
+      <message key="name.invalidPattern" value="Method name not following naming convention - Name ''{0}'' must match pattern ''{1}''." />
+    </module>
+    <module name="MethodName">
+      <property name="id" value="test_only" />
+      <property name="format" value="^[a-z][a-zA-Z0-9]*$|^test[A-Z][a-zA-Z0-9_]*$" />
       <message key="name.invalidPattern" value="Method name not following naming convention - Name ''{0}'' must match pattern ''{1}''." />
     </module>
     <module name="MemberName">
@@ -249,6 +255,10 @@
     <property name="commentFormat" value="CHECKSTYLE DISABLE ([\w\|]+) FOR (-?\d+) LINES" />
     <property name="checkFormat" value="$1" />
     <property name="influenceFormat" value="$2" />
+  </module>
+
+  <module name="SuppressionFilter">
+    <property name="file" value="config/checkstyle-suppressions.xml"/>
   </module>
 
 </module>
