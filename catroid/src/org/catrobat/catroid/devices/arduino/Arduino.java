@@ -20,41 +20,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.catrobat.catroid.devices.arduino;
 
-package org.catrobat.catroid.content;
+import org.catrobat.catroid.bluetooth.base.BluetoothDevice;
 
-import java.util.HashMap;
-import java.util.Map;
+public interface Arduino extends BluetoothDevice {
 
-public class SpriteHistory extends MediaHistory {
-	private static final Map<String, SpriteHistory> INSTANCE = new HashMap<>();
+	void setDigitalArduinoPin(int digitalPinNumber, int pinValue);
 
-	public static SpriteHistory getInstance(String projectName) {
-		if (!INSTANCE.containsKey(projectName)) {
-			INSTANCE.put(projectName, new SpriteHistory());
-		}
-		return INSTANCE.get(projectName);
-	}
+	double getDigitalArduinoPin(int digitalPinNumber);
 
-	public static void clearInstance() {
-		INSTANCE.clear();
-	}
+	double getAnalogArduinoPin(int analogPinNumber);
 
-	public static void updateMap(String oldName, String newName) {
-		if (INSTANCE.containsKey(oldName)) {
-			SpriteHistory historyToUpdate = INSTANCE.remove(oldName);
-			INSTANCE.put(newName, historyToUpdate);
-		}
-	}
-
-	public static boolean getAllUndoRedoStatus() {
-		boolean result = false;
-
-		for (SpriteHistory history : INSTANCE.values()) {
-			result |= history.isRedoable();
-			result |= history.isUndoable();
-		}
-
-		return result;
-	}
+	void setAnalogArduinoPin(int pin, int value);
 }

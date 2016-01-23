@@ -86,7 +86,8 @@
     <string name="preference_description_select_camera">Select camera which is used for face detection</string>
     <string name="preference_title_enable_phiro_bricks">Phiro bricks</string>
     <string name="preference_description_phiro_bricks">Allow to control a Phiro robot</string>
-
+    <string name="preference_title_enable_arduino_bricks">Arduino bricks</string>
+    <string name="preference_description_arduino_bricks">Allow to control Arduino bricks</string>
     <!--  -->
 
 
@@ -140,6 +141,9 @@
     <string name="sprite">Object</string>
     <string name="sprites">Objects</string>
     <string name="spritelist_background_headline">Background</string>
+    <string name="dialog_confirm_delete_object_title">Delete this object?</string>
+    <string name="dialog_confirm_delete_multiple_objects_title">Delete these objects?</string>
+    <string name="dialog_confirm_delete_object_message">This can not be undone!</string>
     <string name="select_all">Select all</string>
     <!--  -->
 
@@ -189,6 +193,9 @@
     <string name="select_look_from_gallery">Select image</string>
     <string name="select_look_from_camera">Select photo</string>
     <string name="look_measure">Measure:</string>
+    <string name="dialog_confirm_delete_look_title">Delete this look?</string>
+    <string name="dialog_confirm_delete_multiple_looks_title">Delete these looks?</string>
+    <string name="dialog_confirm_delete_look_message">This can not be undone!</string>
     <string name="lookname">look name:</string>
     <!--  -->
 
@@ -358,6 +365,7 @@
     <string name="category_lego_nxt">Lego NXT</string>
     <string name="category_drone">ARDrone</string>
     <string name="category_phiro">Phiro</string>
+    <string name="category_arduino">Arduino</string>
     <!--  -->
 
     <!-- Motion bricks -->
@@ -555,8 +563,6 @@
     <string name="error_drone_wrong_platform">We can not run a ARDrone project on your device.</string>
 	<string name="error_rename_incompatible_project">Renaming an incompatible project isn\'t possible.</string>
     <string name="error_changing_description_of_incompatible_project">Changing the description of an incompatible project isn\'t possible.</string>
-    <string name="error_redo">Something went wrong when redoing.</string>
-    <string name="error_undo">Something went wrong when undoing</string>
     <string name="error_unknown_error">An unknown error occurred.</string>
     <!--  -->
 
@@ -575,6 +581,11 @@
     <string name="none_paired">No paired devices found</string>
     <!--  -->
 
+    <!-- Arduino Bricks -->
+    <string name="brick_arduino_select_digital_value">Set Arduino Digital Pin</string>
+    <string name="brick_arduino_select_analog_value">Set Arduino PWM~ Pin</string>
+    <string name="brick_arduino_set_pin_value_to">to</string>
+    <!--  -->
 
     <!-- Lego Mindstorms Strings -->
     <string name="nxt_brick_motor_move">Set NXT motor</string>
@@ -764,6 +775,8 @@
     <string name="formula_editor_function_letter_parameter">(1,\'hello world\')</string>
     <string name="formula_editor_function_join">join</string>
     <string name="formula_editor_function_join_parameter">(\'hello\',\'world\')</string>
+    <string name="formula_editor_function_arduino_read_pin_value_digital">arduino_digital_pin</string>
+    <string name="formula_editor_function_arduino_read_pin_value_analog">arduino_analog_pin</string>
     <string name="formula_editor_function_list_item">element</string>
     <string name="formula_editor_function_list_item_parameter">(1,*list name*)</string>
     <string name="formula_editor_function_contains">contains</string>

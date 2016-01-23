@@ -21,48 +21,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.catrobat.catroid.content;
+package org.catrobat.catroid.io;
 
-import org.catrobat.catroid.content.commands.MediaCommand;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import java.util.Stack;
-
-public abstract class MediaHistory {
-	protected Stack<MediaCommand> redoStack = new Stack<>();
-	protected Stack<MediaCommand> undoStack = new Stack<>();
-
-	public void undo() {
-		MediaCommand command = undoStack.pop();
-		command.undo();
-		redoStack.push(command);
-	}
-
-	public void redo() {
-		MediaCommand command = redoStack.pop();
-		command.execute();
-		undoStack.push(command);
-	}
-
-	public void add(MediaCommand command) {
-		undoStack.push(command);
-		redoStack.clear();
-	}
-
-	public void update() {
-		for (MediaCommand command : undoStack) {
-			command.update();
-		}
-
-		for (MediaCommand command : redoStack) {
-			command.update();
-		}
-	}
-
-	public boolean isUndoable() {
-		return !undoStack.empty();
-	}
-
-	public boolean isRedoable() {
-		return !redoStack.empty();
-	}
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface XStreamFieldKeyOrder {
+	String[] value();
 }

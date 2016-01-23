@@ -33,9 +33,9 @@ import org.catrobat.catroid.common.MessageContainer;
 import org.catrobat.catroid.common.ScreenModes;
 import org.catrobat.catroid.common.ScreenValues;
 import org.catrobat.catroid.content.bricks.Brick;
-import org.catrobat.catroid.content.bricks.PointToBrick;
 import org.catrobat.catroid.devices.mindstorms.nxt.sensors.NXTSensor;
 import org.catrobat.catroid.formulaeditor.DataContainer;
+import org.catrobat.catroid.io.XStreamFieldKeyOrder;
 import org.catrobat.catroid.ui.SettingsActivity;
 import org.catrobat.catroid.utils.Utils;
 
@@ -45,6 +45,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @XStreamAlias("program")
+// Remove checkstyle disable if https://github.com/checkstyle/checkstyle/issues/1349 is fixed
+// CHECKSTYLE DISABLE IndentationCheck FOR 6 LINES
+@XStreamFieldKeyOrder({
+		"xmlHeader",
+		"spriteList",
+		"dataContainer",
+		"settings"
+})
 public class Project implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -107,19 +115,6 @@ public class Project implements Serializable {
 		}
 	}
 
-	public List<PointToBrick> getPointToBricks() {
-		List<PointToBrick> result = new ArrayList<>();
-		for (Sprite sprite : spriteList) {
-			for (Brick brick : sprite.getAllBricks()) {
-				if (brick instanceof PointToBrick) {
-					result.add((PointToBrick) brick);
-				}
-			}
-		}
-
-		return result;
-	}
-
 	public synchronized void addSprite(Sprite sprite) {
 		if (spriteList.contains(sprite)) {
 			return;
@@ -133,15 +128,6 @@ public class Project implements Serializable {
 
 	public List<Sprite> getSpriteList() {
 		return spriteList;
-	}
-
-	public int getSpritePositionById(Sprite sprite) {
-		for (int pos = 0; pos < spriteList.size(); pos++) {
-			if (spriteList.get(pos).getId() == sprite.getId()) {
-				return pos;
-			}
-		}
-		return 0;
 	}
 
 	public void setName(String name) {
