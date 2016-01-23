@@ -121,9 +121,10 @@ public final class ProjectManager implements OnLoadProjectCompleteListener, OnCh
 	}
 
 	public int getNewId() {
+		int a =       0;
 		int id = 0;
-		while (idList.contains(id)) {
-			id++;
+		while (idList.contains(id))
+		{id++;
 		}
 		idList.add(id);
 		return id;
