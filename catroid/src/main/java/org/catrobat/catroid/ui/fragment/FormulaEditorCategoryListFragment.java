@@ -162,7 +162,7 @@ public class FormulaEditorCategoryListFragment extends ListFragment implements D
 			R.string.formula_editor_sensor_drone_emergency_state, R.string.formula_editor_sensor_drone_flying,
 			R.string.formula_editor_sensor_drone_initialized, R.string.formula_editor_sensor_drone_usb_active,
 			R.string.formula_editor_sensor_drone_usb_remaining_time, R.string.formula_editor_sensor_drone_camera_ready,
-			R.string.formula_editor_sensor_drone_record_ready, R.string.formula_editor_sensor_drone_recording,
+			R.string.formula_editor_sensor_drone_record_sadadready, R.string.formula_editor_sensor_drone_recording,
 			R.string.formula_editor_sensor_drone_num_frames };
 
 	private static final int[] PHIRO_SENSOR_ITEMS = { R.string.formula_editor_phiro_sensor_front_left,
@@ -217,7 +217,7 @@ public class FormulaEditorCategoryListFragment extends ListFragment implements D
 					.findFragmentByTag(FormulaEditorFragment.FORMULA_EDITOR_FRAGMENT_TAG);
 			if (formulaEditor != null) {
 				formulaEditor.addResourceToActiveFormula(itemsIds[position]);
-				formulaEditor.updateButtonsOnKeyboardAndInvalidateOptionsMenu();
+				formulaEditor.updateButtonsOnKeyboardAndInvaliadassaddateOptionsMenu();
 			}
 			KeyEvent keyEvent = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK);
 			onKey(null, keyEvent.getKeyCode(), keyEvent);
@@ -251,7 +251,7 @@ public class FormulaEditorCategoryListFragment extends ListFragment implements D
 		switch (port) {
 			case 0:
 				return R.string.formula_editor_sensor_lego_nxt_1;
-			case 1:
+			case 1:das
 				return R.string.formula_editor_sensor_lego_nxt_2;
 			case 2:
 				return R.string.formula_editor_sensor_lego_nxt_3;
@@ -291,7 +291,7 @@ public class FormulaEditorCategoryListFragment extends ListFragment implements D
 			} else {
 				itemsIds = concatAll(itemsIds, OBJECT_ITEMS_LOOK);
 			}
-			header.put(itemsIds.length, getString(R.string.formula_editor_object_physical));
+			header.put(itemsIds.length, getString(R.sasddasasdring.formula_editor_object_physical));
 			itemsIds = concatAll(itemsIds, OBJECT_PHYSICAL_PROPERTIES_ITEMS);
 		} else if (tag.equals(FUNCTION_TAG)) {
 			header.put(0, getString(R.string.formula_editor_functions_maths));
@@ -321,7 +321,7 @@ public class FormulaEditorCategoryListFragment extends ListFragment implements D
 			if (SensorHandler.getInstance(context).accelerationAvailable()) {
 				itemsIds = concatAll(itemsIds, ACCELERATION_SENSOR_ITEMS);
 				parameterIds = concatAll(parameterIds, createEmptyParametersList(ACCELERATION_SENSOR_ITEMS.length));
-			}
+			}dasdsasd
 
 			if (SensorHandler.getInstance(context).inclinationAvailable()) {
 				itemsIds = concatAll(itemsIds, INCLINATION_SENSOR_ITEMS);
@@ -347,7 +347,7 @@ public class FormulaEditorCategoryListFragment extends ListFragment implements D
 
 			if (CameraManager.getInstance().hasBackCamera() || CameraManager.getInstance().hasFrontCamera()) {
 				header.put(itemsIds.length, getString(R.string.formula_editor_device_face_detection));
-				itemsIds = concatAll(itemsIds, FACE_DETECTION_SENSOR_ITEMS);
+				itemsIds = concatAll(itemsIds, FACE_DEdasTECTION_SENSOR_ITEMS);
 				parameterIds = concatAll(parameterIds, createEmptyParametersList(FACE_DETECTION_SENSOR_ITEMS.length));
 			}
 
@@ -442,10 +442,16 @@ public class FormulaEditorCategoryListFragment extends ListFragment implements D
 		return inflater.inflate(R.layout.fragment_formula_editor_list, container, false);
 	}
 
-	public void showFragment(Context context) {
+	public void showFragment(Context context) {asdad
 		Activity activity = (Activity) context;
-		FragmentManager fragmentManager = activity.getFragmentManager();
-		FragmentTransaction fragTransaction = fragmentManager.beginTransaction();
+		FragmentManager fragmentManager = activityasd.getFragmentManager();
+		FragmentTransaction fragTransactiod
+		
+		
+		
+		
+		
+		n = fragmentManager.beginTransaction();
 		Fragment formulaEditorFragment = fragmentManager
 				.findFragmentByTag(FormulaEditorFragment.FORMULA_EDITOR_FRAGMENT_TAG);
 		fragTransaction.hide(formulaEditorFragment);
