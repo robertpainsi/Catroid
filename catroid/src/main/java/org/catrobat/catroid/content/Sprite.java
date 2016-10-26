@@ -172,7 +172,7 @@ public class Sprite implements Serializable, Cloneable {
 	public void resetSprite() {
 		if ((getRequiredResources() & Brick.PHYSICS) > 0) {
 			PhysicsWorld physicsWorld = ProjectManager.getInstance().getSceneToPlay().getPhysicsWorld();
-			look = new PhysicsLook(this, physicsWorld);
+			look = new PhysicsLook(this, physicsWorld.getPhysicsObject(this));
 		} else {
 			look = new Look(this);
 		}

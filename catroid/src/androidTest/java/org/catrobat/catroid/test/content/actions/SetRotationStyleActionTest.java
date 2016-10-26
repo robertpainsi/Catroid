@@ -90,7 +90,7 @@ public class SetRotationStyleActionTest extends AndroidTestCase {
 
 	public void testNormalModeInPhysics() {
 		PhysicsObject physicsObject = physicsWorld.getPhysicsObject(sprite);
-		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsWorld);
+		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsObject);
 
 		physicsLook.setRotationMode(Look.ROTATION_STYLE_ALL_AROUND);
 
@@ -113,7 +113,7 @@ public class SetRotationStyleActionTest extends AndroidTestCase {
 
 	public void testNoModeInPhysics() {
 		PhysicsObject physicsObject = physicsWorld.getPhysicsObject(sprite);
-		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsWorld);
+		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsObject);
 
 		physicsLook.setRotationMode(Look.ROTATION_STYLE_NONE);
 
@@ -136,7 +136,7 @@ public class SetRotationStyleActionTest extends AndroidTestCase {
 
 	public void testLRModeInPhysics() {
 		PhysicsObject physicsObject = physicsWorld.getPhysicsObject(sprite);
-		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsWorld);
+		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsObject);
 
 		physicsLook.setRotationMode(Look.ROTATION_STYLE_LEFT_RIGHT_ONLY);
 

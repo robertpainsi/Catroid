@@ -97,7 +97,7 @@ public class PhysicsShapeBuilderTest extends InstrumentationTestCase {
 
 		sprite = new SingleSprite("TestSprite");
 
-		physicsLook = new PhysicsLook(sprite, physicsWorld);
+		physicsLook = new PhysicsLook(sprite, physicsWorld.getPhysicsObject(sprite));
 	}
 
 	@Override

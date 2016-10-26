@@ -58,7 +58,7 @@ public class PhysicsBaseTest extends InstrumentationTestCase {
 
 		physicsWorld = project.getDefaultScene().getPhysicsWorld();
 		sprite = new Sprite("TestSprite");
-		sprite.look = new PhysicsLook(sprite, physicsWorld);
+		sprite.look = new PhysicsLook(sprite, physicsWorld.getPhysicsObject(sprite));
 
 		project.getDefaultScene().addSprite(sprite);
 

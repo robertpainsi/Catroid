@@ -39,9 +39,9 @@ public class PhysicsLook extends Look {
 	private final PhysicsObject physicsObject;
 	private final PhysicsObjectStateHandler physicsObjectStateHandler = new PhysicsObjectStateHandler();
 
-	public PhysicsLook(Sprite sprite, PhysicsWorld physicsWorld) {
+	public PhysicsLook(Sprite sprite, PhysicsObject physicsObject) {
 		super(sprite);
-		physicsObject = physicsWorld.getPhysicsObject(sprite);
+		this.physicsObject = physicsObject;
 	}
 
 	@Override

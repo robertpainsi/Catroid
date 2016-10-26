@@ -140,9 +140,8 @@ public class PhysicsWorldTest extends AndroidTestCase {
 	public void testSteps() throws SecurityException, IllegalArgumentException, NoSuchFieldException,
 			IllegalAccessException {
 		Sprite sprite = new Sprite("TestSprite");
-		sprite.look = new PhysicsLook(sprite, physicsWorld);
-
 		PhysicsObject physicsObject = physicsWorld.getPhysicsObject(sprite);
+		sprite.look = new PhysicsLook(sprite, physicsObject);
 
 		Vector2 velocity = new Vector2(2.3f, 4.5f);
 		float rotationSpeed = 45.0f;

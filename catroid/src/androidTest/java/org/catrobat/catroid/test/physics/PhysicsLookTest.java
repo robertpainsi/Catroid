@@ -116,7 +116,7 @@ public class PhysicsLookTest extends InstrumentationTestCase {
 
 	public void testPositionAndAngle() {
 		PhysicsObject physicsObject = physicsWorld.getPhysicsObject(sprite);
-		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsWorld);
+		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsObject);
 
 		float x = 1.2f;
 		physicsLook.setX(x);
@@ -153,7 +153,7 @@ public class PhysicsLookTest extends InstrumentationTestCase {
 		lookData.setPixmap(pixmap);
 
 		PhysicsObject physicsObject = physicsWorld.getPhysicsObject(sprite);
-		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsWorld);
+		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsObject);
 
 		Shape[] shapes = (Shape[]) Reflection.getPrivateField(physicsObject, "shapes");
 		assertEquals("Shapes are not null", null, shapes);
@@ -250,7 +250,7 @@ public class PhysicsLookTest extends InstrumentationTestCase {
 		lookData.setLookFilename(testImage.getName());
 		lookData.setLookName(testImage.getName());
 
-		sprite.look = new PhysicsLook(sprite, physicsWorld);
+		sprite.look = new PhysicsLook(sprite, physicsWorld.getPhysicsObject(sprite));
 		try {
 			sprite.look.setLookData(lookData);
 		} catch (Exception exception) {
@@ -260,7 +260,7 @@ public class PhysicsLookTest extends InstrumentationTestCase {
 	}
 
 	public void testDefaultValueEqualityOfPhysicsLookAndLook() {
-		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsWorld);
+		PhysicsLook physicsLook = new PhysicsLook(sprite, physicsWorld.getPhysicsObject(sprite));
 		Look look = new Look(sprite);
 
 		assertEquals("physicsLook getAngularVelocityInUserInterfaceDimensionUnit()"

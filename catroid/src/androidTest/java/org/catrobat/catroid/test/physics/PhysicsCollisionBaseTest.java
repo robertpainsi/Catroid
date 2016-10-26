@@ -66,7 +66,8 @@ public abstract class PhysicsCollisionBaseTest extends PhysicsBaseTest implement
 		super.setUp();
 
 		sprite2 = new Sprite("TestSprite2");
-		sprite2.look = new PhysicsLook(sprite2, physicsWorld);
+		physicsObject2 = physicsWorld.getPhysicsObject(sprite2);
+		sprite2.look = new PhysicsLook(sprite2, physicsObject2);
 		sprite2.setActionFactory(new ActionPhysicsFactory());
 
 		LookData lookdata = PhysicsTestUtils.generateLookData(rectangle125x125File);
@@ -74,7 +75,6 @@ public abstract class PhysicsCollisionBaseTest extends PhysicsBaseTest implement
 		assertTrue("getLookData is null", sprite2.look.getLookData() != null);
 
 		physicsObject1 = physicsWorld.getPhysicsObject(sprite);
-		physicsObject2 = physicsWorld.getPhysicsObject(sprite2);
 
 		World world = (World) Reflection.getPrivateField(PhysicsWorld.class, physicsWorld, "world");
 		physicsCollisionTestListener = new PhysicsCollisionTestListener(this, physicsWorld);

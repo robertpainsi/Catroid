@@ -121,7 +121,8 @@ public class PhysicsActiveStageAreaTest extends PhysicsBaseTest {
 				TestUtils.TYPE_IMAGE_FILE);
 
 		sprite = new SingleSprite("TestSprite");
-		sprite.look = new PhysicsLook(sprite, physicsWorld);
+		physicsObject = physicsWorld.getPhysicsObject(sprite);
+		sprite.look = new PhysicsLook(sprite, physicsObject);
 		sprite.setActionFactory(new ActionPhysicsFactory());
 		LookData lookdata = PhysicsTestUtils.generateLookData(rectangle8192x8192File);
 		sprite.look.setLookData(lookdata);
@@ -129,7 +130,6 @@ public class PhysicsActiveStageAreaTest extends PhysicsBaseTest {
 		physicsLook.updatePhysicsObjectState(true);
 		assertTrue("getLookData is null", sprite.look.getLookData() != null);
 
-		physicsObject = physicsWorld.getPhysicsObject(sprite);
 		physicsLook = ((PhysicsLook) sprite.look);
 		assertTrue("huge physicsObject is hung up at start", !physicsLook.isHangedUp());
 
