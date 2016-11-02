@@ -311,6 +311,13 @@ public final class StorageHandler {
 		xstream.registerConverter(new XStreamSpriteConverter(xstream.getMapper(), xstream.getReflectionProvider()));
 		xstream.registerConverter(new XStreamSettingConverter(xstream.getMapper(), xstream.getReflectionProvider()));
 
+		xstream.omitField(CameraBrick.class, "spinnerValues");
+		xstream.omitField(ChooseCameraBrick.class, "spinnerValues");
+		xstream.omitField(FlashBrick.class, "spinnerValues");
+		xstream.omitField(StopScriptBrick.class, "spinnerValue");
+		xstream.omitField(UserVariable.class, "visible");
+		xstream.omitField(UserVariable.class, "dummy");
+
 		setProgramXstreamAliases();
 	}
 
@@ -394,7 +401,7 @@ public final class StorageHandler {
 		xstream.alias("brick", IfLogicElseBrick.class);
 		xstream.alias("brick", IfLogicEndBrick.class);
 		xstream.alias("brick", IfThenLogicBeginBrick.class);
-		xstream.alias("brick", IfThenLogicEndBrick .class);
+		xstream.alias("brick", IfThenLogicEndBrick.class);
 		xstream.alias("brick", IfOnEdgeBounceBrick.class);
 		xstream.alias("brick", InsertItemIntoUserListBrick.class);
 		xstream.alias("brick", FlashBrick.class);
