@@ -255,7 +255,7 @@ public class NfcTagFragment extends ScriptActivityFragment implements NfcTagBase
 		String uid = NfcHandler.getUid(intent);
 		if (uid != null) {
 			NfcTagData newNfcTagData = new NfcTagData();
-			String newTagName = Utils.getUniqueNfcTagName(getString(R.string.default_tag_name));
+			String newTagName = Utils.getUniqueName(getString(R.string.default_tag_name), nfcTagDataList);
 			newNfcTagData.setName(newTagName);
 			newNfcTagData.setNfcTagUid(uid);
 			adapter.add(newNfcTagData);

@@ -141,7 +141,7 @@ public final class BackPackSpriteController {
 
 		Sprite backPackSprite = spriteToEdit.cloneForBackPack();
 
-		String newSpriteName = Utils.getUniqueSpriteName(spriteToEdit);
+		String newSpriteName = Utils.getUniqueName(spriteToEdit, BackPackListManager.getInstance().getAllBackPackedSprites());
 		backPackSprite.setName(newSpriteName);
 		backPackSprite.isBackpackObject = true;
 
@@ -172,7 +172,7 @@ public final class BackPackSpriteController {
 		}
 
 		Sprite unpackedSprite = selectedSprite.cloneForBackPack();
-		String newSpriteName = Utils.getUniqueSpriteName(selectedSprite);
+		String newSpriteName = Utils.getUniqueName(selectedSprite, ProjectManager.getInstance().getCurrentScene().getSpriteList());
 		unpackedSprite.setName(newSpriteName);
 
 		Sprite currentSprite = ProjectManager.getInstance().getCurrentSprite();

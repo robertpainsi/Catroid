@@ -187,8 +187,10 @@ public class SceneTest extends AndroidTestCase {
 		assertTrue(hiddenSceneName2 + " was not serialized and deserialized correctly", BackPackListManager
 				.getInstance().backPackedScenesContains(hiddenBackPackedScene1, false));
 
-		String unpackedHiddenSceneName1 = Utils.getUniqueSceneName(hiddenBackPackedScene1.getName(), false);
-		String unpackedHiddenSceneName2 = Utils.getUniqueSceneName(hiddenBackPackedScene2.getName(), false);
+		String unpackedHiddenSceneName1 = Utils.getUniqueName(hiddenBackPackedScene1,
+				ProjectManager.getInstance().getCurrentProject().getSceneList());
+		String unpackedHiddenSceneName2 = Utils.getUniqueName(hiddenBackPackedScene2,
+				ProjectManager.getInstance().getCurrentProject().getSceneList());
 
 		Scene unpackedScene = BackPackSceneController.getInstance().unpackScene(backPackedScene);
 		assertNotNull("unpacked scene was null", unpackedScene);

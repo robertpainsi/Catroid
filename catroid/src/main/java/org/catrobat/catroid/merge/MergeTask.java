@@ -26,10 +26,13 @@ package org.catrobat.catroid.merge;
 import android.app.Activity;
 import android.util.Log;
 
+import com.google.common.collect.Iterables;
+
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.LookData;
+import org.catrobat.catroid.common.Nameable;
 import org.catrobat.catroid.common.ProjectData;
 import org.catrobat.catroid.common.SoundInfo;
 import org.catrobat.catroid.content.Project;
@@ -101,7 +104,9 @@ public class MergeTask {
 		if (addScene) {
 			Scene scene = secondProject.getDefaultScene();
 			oldSceneName = scene.getName();
-			result = scene.rename(Utils.getUniqueSceneName(scene.getName(), firstProject, secondProject), activity, false);
+			Iterable<Scene> usedSceneNames = Iterables.concat(
+					firstProject.getSceneList(), secondProject.getSceneList());
+			result = scene.rename(Utils.getUniqueName(scene.getName(), usedSceneNames, true), activity, false);
 		}
 
 		if (firstProject.getSceneList().size() == 1 && secondProject.getSceneList().size() == 1) {

@@ -618,7 +618,8 @@ public final class LookController {
 		if (BackPackListManager.getInstance().backPackedLooksContain(currentLookData, false)) {
 			return currentLookData;
 		}
-		String newLookDataName = Utils.getUniqueLookName(currentLookData, true);
+		String newLookDataName = Utils.getUniqueName(currentLookData,
+				BackPackListManager.getInstance().getAllBackPackedLooks());
 		return backPack(currentLookData, newLookDataName, true);
 	}
 
@@ -638,7 +639,8 @@ public final class LookController {
 			return selectedLookDataBackPack;
 		}
 		selectedLookDataBackPack.isBackpackLookData = true;
-		String newLookDataName = Utils.getUniqueLookName(selectedLookDataBackPack, false);
+		String newLookDataName = Utils.getUniqueName(selectedLookDataBackPack,
+				ProjectManager.getInstance().getCurrentSprite().getLookDataList());
 		String existingFileNameInProjectDirectory = lookFileAlreadyInProjectDirectory(selectedLookDataBackPack);
 		if (existingFileNameInProjectDirectory == null) {
 			Log.d(TAG, "copyLookBackPack" + newLookDataName);

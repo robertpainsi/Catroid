@@ -432,7 +432,7 @@ public final class SoundController {
 		} catch (IOException ioException) {
 			Log.e(TAG, Log.getStackTraceString(ioException));
 		}
-		String newSoundInfoTitle = Utils.getUniqueSoundName(soundInfo, false);
+		String newSoundInfoTitle = Utils.getUniqueName(soundInfo, soundInfoList);
 		updateSoundAdapter(soundInfo, adapter, newSoundInfoTitle, false, false);
 	}
 
@@ -673,7 +673,7 @@ public final class SoundController {
 		SoundInfo soundInfoToCheck = new SoundInfo();
 		soundInfoToCheck.setSoundFileName(fileName);
 		soundInfoToCheck.setName(name);
-		name = Utils.getUniqueSoundName(soundInfoToCheck, false);
+		name = Utils.getUniqueName(soundInfoToCheck, soundList);
 
 		SoundInfo soundInfo = new SoundInfo();
 		soundInfo.setSoundFileName(fileName);
@@ -760,7 +760,7 @@ public final class SoundController {
 		if (BackPackListManager.getInstance().backPackedSoundsContain(selectedSoundInfo, false)) {
 			return selectedSoundInfo;
 		}
-		String newSoundInfoTitle = Utils.getUniqueSoundName(selectedSoundInfo, true);
+		String newSoundInfoTitle = Utils.getUniqueName(selectedSoundInfo, BackPackListManager.getInstance().getAllBackPackedSounds());
 		return backPack(selectedSoundInfo, newSoundInfoTitle, true);
 	}
 
@@ -775,7 +775,8 @@ public final class SoundController {
 	}
 
 	public SoundInfo unpack(SoundInfo currentSoundInfo, boolean deleteUnpackedItems, boolean fromHiddenBackPack) {
-		String newSoundTitle = Utils.getUniqueSoundName(currentSoundInfo, false);
+		String newSoundTitle = Utils.getUniqueName(currentSoundInfo,
+				ProjectManager.getInstance().getCurrentSprite().getSoundList());
 		if (copySoundBackPack(currentSoundInfo, newSoundTitle, true) != null) {
 			return updateSoundAdapter(currentSoundInfo,
 					BackPackListManager.getInstance().getCurrentSoundAdapter(), newSoundTitle, deleteUnpackedItems, fromHiddenBackPack);

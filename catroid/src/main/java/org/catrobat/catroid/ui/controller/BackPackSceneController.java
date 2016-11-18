@@ -220,7 +220,7 @@ public final class BackPackSceneController {
 			return null;
 		}
 		ProjectManager projectManager = ProjectManager.getInstance();
-		String newName = Utils.getUniqueSceneName(selectedScene.getName(), false);
+		String newName = Utils.getUniqueName(selectedScene, projectManager.getCurrentProject().getSceneList(), true);
 
 		File sourceScene = new File(Utils.buildBackpackScenePath(selectedScene.getName()));
 		File targetScene = new File(Utils.buildScenePath(projectManager.getCurrentProject().getName(), newName));

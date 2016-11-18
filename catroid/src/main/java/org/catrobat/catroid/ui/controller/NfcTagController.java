@@ -178,7 +178,7 @@ public final class NfcTagController {
 	}
 
 	public NfcTagData updateNfcTagAdapter(String name, String uid, List<NfcTagData> nfcTagDataList, NfcTagBaseAdapter adapter) {
-		name = Utils.getUniqueNfcTagName(name);
+		name = Utils.getUniqueName(name, nfcTagDataList);
 
 		NfcTagData newNfcTagData = new NfcTagData();
 		newNfcTagData.setName(name);

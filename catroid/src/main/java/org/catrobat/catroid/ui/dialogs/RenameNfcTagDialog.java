@@ -28,6 +28,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 
+import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.ui.ScriptActivity;
 import org.catrobat.catroid.utils.ToastUtil;
@@ -67,7 +68,7 @@ public class RenameNfcTagDialog extends TextDialog {
 		}
 
 		if (newNfcTagName != null && !newNfcTagName.equalsIgnoreCase("") && !newNfcTagName.equalsIgnoreCase(getString(R.string.brick_when_nfc_default_all))) {
-			newNfcTagName = Utils.getUniqueNfcTagName(newNfcTagName);
+			newNfcTagName = Utils.getUniqueName(newNfcTagName, ProjectManager.getInstance().getCurrentSprite().getNfcTagList());
 		} else {
 			Utils.showErrorDialog(getActivity(), R.string.nfctagname_invalid);
 			dismiss();

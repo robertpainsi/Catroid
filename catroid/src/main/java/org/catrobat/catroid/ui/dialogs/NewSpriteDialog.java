@@ -178,7 +178,7 @@ public class NewSpriteDialog extends DialogFragment {
 		if (newObjectName == null) {
 			newObjectName = getString(R.string.new_sprite_dialog_default_sprite_name);
 		}
-		newObjectName = Utils.getUniqueObjectName(newObjectName);
+		newObjectName = Utils.getUniqueName(newObjectName, ProjectManager.getInstance().getCurrentScene().getSpriteList());
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
