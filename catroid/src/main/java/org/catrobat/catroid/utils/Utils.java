@@ -795,14 +795,6 @@ public final class Utils {
 		return projectDirectory.exists();
 	}
 
-	public static boolean checkIfLookExists(String name) {
-		return containsName(name, ProjectManager.getInstance().getCurrentSprite().getLookDataList());
-	}
-
-	public static boolean checkIfSoundExists(String name) {
-		return containsName(name, ProjectManager.getInstance().getCurrentSprite().getSoundList());
-	}
-
 	public static boolean containsName(String name, Iterable<? extends Nameable> items) {
 		for (Nameable n : items) {
 			if (name.equals(n.getName())) {

@@ -31,6 +31,7 @@ import android.os.Handler;
 import android.os.ResultReceiver;
 import android.util.Log;
 
+import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.scratchconverter.Client;
 import org.catrobat.catroid.scratchconverter.Client.DownloadCallback;
@@ -105,10 +106,10 @@ public final class DownloadUtil {
 		if (callingActivity.contains(LookFragment.TAG) || callingActivity.contains(SoundFragment.TAG)) {
 			switch (mediaType) {
 				case Constants.MEDIA_TYPE_LOOK:
-					mediaNameExists = Utils.checkIfLookExists(mediaName);
+					mediaNameExists = Utils.containsName(mediaName, ProjectManager.getInstance().getCurrentSprite().getLookDataList());
 					break;
 				case Constants.MEDIA_TYPE_SOUND:
-					mediaNameExists = Utils.checkIfSoundExists(mediaName);
+					mediaNameExists = Utils.containsName(mediaName, ProjectManager.getInstance().getCurrentSprite().getSoundList());
 					break;
 				default:
 					mediaNameExists = false;

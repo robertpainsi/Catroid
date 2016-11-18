@@ -242,7 +242,7 @@ public class OverwriteRenameMediaDialog extends DialogFragment implements OnClic
 			switch (mediaType) {
 				case Constants.MEDIA_TYPE_LOOK:
 					if (callingActivity.contains(LookFragment.TAG)) {
-						if (Utils.checkIfLookExists(newMediaName)) {
+						if (Utils.containsName(newMediaName, ProjectManager.getInstance().getCurrentSprite().getLookDataList())) {
 							ToastUtil.showError(context, R.string.look_rename_overwrite);
 							return false;
 						}
@@ -251,7 +251,7 @@ public class OverwriteRenameMediaDialog extends DialogFragment implements OnClic
 					}
 					break;
 				case Constants.MEDIA_TYPE_SOUND:
-					if (Utils.checkIfSoundExists(newMediaName)) {
+					if (Utils.containsName(newMediaName, ProjectManager.getInstance().getCurrentSprite().getSoundList())) {
 						ToastUtil.showError(context, R.string.rename_sound_overwrite);
 						return false;
 					}
