@@ -29,6 +29,7 @@ import android.util.Log;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.DefaultProjectHandler;
 import org.catrobat.catroid.common.LookData;
+import org.catrobat.catroid.common.Nameable;
 import org.catrobat.catroid.common.ScreenValues;
 import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.content.Script;
@@ -168,6 +169,49 @@ public class UtilsTest extends AndroidTestCase {
 		String testString = "This:IsA-\" */ :<Very>?|Very\\\\Long_Test_String";
 		String newString = Utils.deleteSpecialCharactersInString(testString);
 		assertEquals("Strings are not equal!", "ThisIsA-  VeryVeryLong_Test_String", newString);
+	}
+
+	public void testUniqueName() {
+		String name = "name";
+		assertEquals("The name shouldn't change if the name is not in the list",
+				name, Utils.getUniqueName(name, toNameableList("hello", "world")));
+	}
+
+	public void testUniqueNameWithEmptyList() {
+		String name = "name";
+		assertEquals("The name shouldn't change if the name is not in the list",
+				name, Utils.getUniqueName(name, toNameableList()));
+	}
+
+	public void testUniqueNameAlwaysAppendNumberWithEmptyList() {
+		String name = "name";
+		assertEquals("Number not appended", "name_1", Utils.getUniqueName(name, toNameableList(), true));
+	}
+
+	public void testUniqueNameWithConflicts() {
+		String name = "name";
+		assertEquals("Wrong unique name found",
+				"name_3", Utils.getUniqueName(name, toNameableList("name", "name_1", "name_2")));
+	}
+
+	public void testUniqueNameListHasFreeNameInBetween() {
+		String name = "name";
+		assertEquals("Wrong unique name found",
+				"name_2", Utils.getUniqueName(name, toNameableList("name", "name_1", "name_3")));
+	}
+
+	public void testUniqueNameAlwaysAppendNumberWithConflicts() {
+		String name = "name";
+		assertEquals("Wrong unique name found",
+				"name_3", Utils.getUniqueName(name, toNameableList("name_1", "name_2"), true));
+	}
+
+	private List<Nameable> toNameableList(String... items) {
+		List<Nameable> list = new ArrayList<>();
+		for (String item : items) {
+			list.add(new NameableImpl(item));
+		}
+		return list;
 	}
 
 	public void testBuildProjectPath() {
@@ -317,5 +361,23 @@ public class UtilsTest extends AndroidTestCase {
 
 		spriteList.add(catroidSprite);
 		assertTrue("Failed to recognize the standard project", Utils.isStandardProject(defaultProject, getContext()));
+	}
+
+	private static class NameableImpl implements Nameable {
+		private String name;
+
+		NameableImpl(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String getName() {
+			return name;
+		}
+
+		@Override
+		public void setName(String name) {
+			this.name = name;
+		}
 	}
 }
