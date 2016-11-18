@@ -22,12 +22,14 @@
  */
 package org.catrobat.catroid.pocketmusic.note;
 
+import org.catrobat.catroid.common.Nameable;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Project implements Serializable {
+public class Project implements Serializable, Nameable {
 
 	public static final int DEFAULT_BEATS_PER_MINUTE = 60;
 	public static final MusicalBeat DEFAULT_BEAT = MusicalBeat.BEAT_4_4;
@@ -61,10 +63,12 @@ public class Project implements Serializable {
 		this.name = name;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}

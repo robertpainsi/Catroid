@@ -31,6 +31,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.MessageContainer;
+import org.catrobat.catroid.common.Nameable;
 import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.content.bricks.FormulaBrick;
 import org.catrobat.catroid.content.bricks.PointToBrick;
@@ -63,7 +64,7 @@ import java.util.List;
 		"originalWidth",
 		"originalHeight"
 })
-public class Scene implements Serializable {
+public class Scene implements Serializable, Nameable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -108,6 +109,7 @@ public class Scene implements Serializable {
 		addSprite(background);
 	}
 
+	@Override
 	public String getName() {
 		return sceneName;
 	}
@@ -308,6 +310,7 @@ public class Scene implements Serializable {
 		return true;
 	}
 
+	@Override
 	public synchronized void setName(String name) {
 		sceneName = name;
 	}

@@ -45,7 +45,7 @@ import org.catrobat.catroid.utils.Utils;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 
-public class LookData implements Serializable, Cloneable {
+public class LookData implements Serializable, Cloneable, Nameable {
 	private static final long serialVersionUID = 1L;
 	private static final String TAG = LookData.class.getSimpleName();
 
@@ -180,10 +180,12 @@ public class LookData implements Serializable, Cloneable {
 		}
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}

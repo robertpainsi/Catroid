@@ -32,7 +32,7 @@ import org.catrobat.catroid.utils.Utils;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 
-public class SoundInfo implements Serializable, Comparable<SoundInfo>, Cloneable {
+public class SoundInfo implements Serializable, Comparable<SoundInfo>, Cloneable, Nameable {
 
 	private static final long serialVersionUID = 1L;
 	private static final String TAG = SoundInfo.class.getSimpleName();
@@ -111,10 +111,12 @@ public class SoundInfo implements Serializable, Comparable<SoundInfo>, Cloneable
 		}
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void setName(String title) {
 		this.name = title;
 	}

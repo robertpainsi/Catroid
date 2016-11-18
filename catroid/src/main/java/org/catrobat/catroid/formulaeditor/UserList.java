@@ -22,11 +22,13 @@
  */
 package org.catrobat.catroid.formulaeditor;
 
+import org.catrobat.catroid.common.Nameable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserList implements Serializable {
+public class UserList implements Serializable, Nameable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -58,10 +60,12 @@ public class UserList implements Serializable {
 		this.list = list;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}

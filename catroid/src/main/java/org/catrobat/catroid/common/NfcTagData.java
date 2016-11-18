@@ -24,7 +24,7 @@ package org.catrobat.catroid.common;
 
 import java.io.Serializable;
 
-public class NfcTagData implements Serializable, Comparable<NfcTagData>, Cloneable {
+public class NfcTagData implements Serializable, Comparable<NfcTagData>, Cloneable, Nameable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -47,10 +47,12 @@ public class NfcTagData implements Serializable, Comparable<NfcTagData>, Cloneab
 	public NfcTagData() {
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
