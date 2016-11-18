@@ -253,7 +253,7 @@ public class ProgramMenuActivityTest extends BaseActivityInstrumentationTestCase
 		List<LookData> lookDataList = projectManager.getCurrentSprite().getLookDataList();
 		LookData lookData = new LookData();
 		lookData.setLookFilename(imageFile.getName());
-		lookData.setLookName("Catroid sun");
+		lookData.setName("Catroid sun");
 		lookDataList.add(lookData);
 		projectManager.getFileChecksumContainer().addChecksum(lookData.getChecksum(), lookData.getAbsolutePath());
 
@@ -262,7 +262,7 @@ public class ProgramMenuActivityTest extends BaseActivityInstrumentationTestCase
 				UiTestUtils.FileTypes.SOUND);
 		SoundInfo soundInfo = new SoundInfo();
 		soundInfo.setSoundFileName(soundFile.getName());
-		soundInfo.setTitle("longsound");
+		soundInfo.setName("longsound");
 
 		List<SoundInfo> soundInfoList = ProjectManager.getInstance().getCurrentSprite().getSoundList();
 		soundInfoList.add(soundInfo);

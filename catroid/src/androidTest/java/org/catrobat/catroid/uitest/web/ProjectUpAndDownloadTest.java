@@ -317,7 +317,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 					getInstrumentation().getContext(), UiTestUtils.FileTypes.SOUND);
 			SoundInfo soundInfo = new SoundInfo();
 			soundInfo.setSoundFileName(soundFile.getName());
-			soundInfo.setTitle(soundName + Integer.toString(number));
+			soundInfo.setName(soundName + Integer.toString(number));
 			soundInfoList.add(soundInfo);
 			ProjectManager.getInstance().getFileChecksumContainer()
 					.addChecksum(soundInfo.getChecksum(), soundInfo.getAbsolutePath());
@@ -426,7 +426,7 @@ public class ProjectUpAndDownloadTest extends BaseActivityInstrumentationTestCas
 					getInstrumentation().getContext(), UiTestUtils.FileTypes.SOUND);
 			SoundInfo soundInfo = new SoundInfo();
 			soundInfo.setSoundFileName(soundFile.getName());
-			soundInfo.setTitle(soundName + Integer.toString(number));
+			soundInfo.setName(soundName + Integer.toString(number));
 			soundInfoList.add(soundInfo);
 			ProjectManager.getInstance().getFileChecksumContainer()
 					.addChecksum(soundInfo.getChecksum(), soundInfo.getAbsolutePath());

@@ -48,7 +48,7 @@ public class LookListAdapter extends CheckBoxListAdapter<LookData> {
 		ListItemViewHolder listItemViewHolder = (ListItemViewHolder) listItemView.getTag();
 		LookData lookData = getItem(position);
 
-		listItemViewHolder.name.setText(lookData.getLookName());
+		listItemViewHolder.name.setText(lookData.getName());
 		listItemViewHolder.image.setImageBitmap(lookData.getThumbnailBitmap());
 
 		if (showDetails) {

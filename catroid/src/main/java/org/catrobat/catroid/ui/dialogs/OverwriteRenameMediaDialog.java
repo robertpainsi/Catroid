@@ -216,7 +216,7 @@ public class OverwriteRenameMediaDialog extends DialogFragment implements OnClic
 				case Constants.MEDIA_TYPE_LOOK:
 					LookData lookToRemove = null;
 					for (LookData lookData : ProjectManager.getInstance().getCurrentSprite().getLookDataList()) {
-						if (lookData.getLookName().compareTo(mediaName) == 0) {
+						if (lookData.getName().compareTo(mediaName) == 0) {
 							lookToRemove = lookData;
 							ProjectManager.getInstance().getCurrentSprite().getLookDataList().remove(lookToRemove);
 							StorageHandler.getInstance().deleteFile(lookToRemove.getAbsolutePath(), false);
@@ -227,7 +227,7 @@ public class OverwriteRenameMediaDialog extends DialogFragment implements OnClic
 				case Constants.MEDIA_TYPE_SOUND:
 					SoundInfo soundToRemove = null;
 					for (SoundInfo soundInfo : ProjectManager.getInstance().getCurrentSprite().getSoundList()) {
-						if (soundInfo.getTitle().compareTo(mediaName) == 0) {
+						if (soundInfo.getName().compareTo(mediaName) == 0) {
 							soundToRemove = soundInfo;
 							ProjectManager.getInstance().getCurrentSprite().getSoundList().remove(soundToRemove);
 							StorageHandler.getInstance().deleteFile(soundToRemove.getAbsolutePath(), false);

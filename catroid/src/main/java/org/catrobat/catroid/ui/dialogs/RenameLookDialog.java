@@ -68,7 +68,7 @@ public class RenameLookDialog extends TextDialog {
 
 		if (!newLookName.equalsIgnoreCase("")) {
 			LookData lookData = new LookData();
-			lookData.setLookName(newLookName);
+			lookData.setName(newLookName);
 			newLookName = Utils.getUniqueLookName(lookData, false);
 		} else {
 			Utils.showErrorDialog(getActivity(), R.string.lookname_invalid);

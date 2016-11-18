@@ -146,7 +146,7 @@ public class SetLookBrick extends BrickBaseType implements OnLookDataListChanged
 		ArrayAdapter<LookData> arrayAdapter = new ArrayAdapter<LookData>(context, android.R.layout.simple_spinner_item);
 		arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		LookData dummyLookData = new LookData();
-		dummyLookData.setLookName(context.getString(R.string.new_broadcast_message));
+		dummyLookData.setName(context.getString(R.string.new_broadcast_message));
 		arrayAdapter.add(dummyLookData);
 		for (LookData lookData : getSprite().getLookDataList()) {
 			arrayAdapter.add(lookData);
@@ -249,7 +249,7 @@ public class SetLookBrick extends BrickBaseType implements OnLookDataListChanged
 		@Override
 		public long getItemId(int paramInt) {
 			LookData currentLook = spinnerAdapter.getItem(paramInt);
-			if (!currentLook.getLookName().equals(context.getString(R.string.new_broadcast_message))) {
+			if (!currentLook.getName().equals(context.getString(R.string.new_broadcast_message))) {
 				oldSelectedLook = currentLook;
 			}
 			return spinnerAdapter.getItemId(paramInt);

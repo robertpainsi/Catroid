@@ -68,7 +68,7 @@ public final class NfcTagController {
 			return;
 		}
 		holder.scanNewTagButton.setTag(position);
-		holder.titleTextView.setText(nfcTagData.getNfcTagName());
+		holder.titleTextView.setText(nfcTagData.getName());
 
 		handleCheckboxes(position, holder, nfcTagAdapter);
 		handleDetails(nfcTagAdapter, holder, nfcTagData);
@@ -149,13 +149,13 @@ public final class NfcTagController {
 	}
 
 	public NfcTagData copyNfcTag(NfcTagData selectedNfcTagData, List<NfcTagData> nfcTagDataList, NfcTagBaseAdapter adapter) {
-		return updateNfcTagAdapter(selectedNfcTagData.getNfcTagName(), selectedNfcTagData.getNfcTagUid(), nfcTagDataList,
+		return updateNfcTagAdapter(selectedNfcTagData.getName(), selectedNfcTagData.getNfcTagUid(), nfcTagDataList,
 				adapter);
 	}
 
 	public NfcTagData copyNfcTag(int position, List<NfcTagData> nfcTagDataList, NfcTagBaseAdapter adapter) {
 		NfcTagData nfcTagData = nfcTagDataList.get(position);
-		return NfcTagController.getInstance().updateNfcTagAdapter(nfcTagData.getNfcTagName(), nfcTagData.getNfcTagUid(),
+		return NfcTagController.getInstance().updateNfcTagAdapter(nfcTagData.getName(), nfcTagData.getNfcTagUid(),
 				nfcTagDataList, adapter);
 	}
 
@@ -181,7 +181,7 @@ public final class NfcTagController {
 		name = Utils.getUniqueNfcTagName(name);
 
 		NfcTagData newNfcTagData = new NfcTagData();
-		newNfcTagData.setNfcTagName(name);
+		newNfcTagData.setName(name);
 		newNfcTagData.setNfcTagUid(uid);
 		nfcTagDataList.add(newNfcTagData);
 

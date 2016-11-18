@@ -265,13 +265,13 @@ public class SetLookBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 				getInstrumentation().getContext(), UiTestUtils.FileTypes.IMAGE);
 		LookData lookData = new LookData();
 		lookData.setLookFilename(lookFile.getName());
-		lookData.setLookName(lookName);
+		lookData.setName(lookName);
 
 		lookFile2 = UiTestUtils.saveFileToProject(UiTestUtils.DEFAULT_TEST_PROJECT_NAME, project.getDefaultScene().getName(), "image2.png", RESOURCE_LOOK2,
 				getInstrumentation().getContext(), UiTestUtils.FileTypes.IMAGE);
 		LookData lookData2 = new LookData();
 		lookData2.setLookFilename(lookFile2.getName());
-		lookData2.setLookName(lookName2);
+		lookData2.setName(lookName2);
 
 		lookDataList.add(lookData);
 		lookDataList.add(lookData2);

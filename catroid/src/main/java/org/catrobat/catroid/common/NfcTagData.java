@@ -47,11 +47,11 @@ public class NfcTagData implements Serializable, Comparable<NfcTagData>, Cloneab
 	public NfcTagData() {
 	}
 
-	public String getNfcTagName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setNfcTagName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

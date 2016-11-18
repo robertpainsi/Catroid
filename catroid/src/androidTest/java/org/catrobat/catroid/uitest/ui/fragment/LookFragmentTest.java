@@ -154,21 +154,21 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		lookData = new LookData();
 		lookData.setLookFilename(imageFile.getName());
-		lookData.setLookName(FIRST_TEST_LOOK_NAME);
+		lookData.setName(FIRST_TEST_LOOK_NAME);
 		lookDataList.add(lookData);
 
 		projectManager.getFileChecksumContainer().addChecksum(lookData.getChecksum(), lookData.getAbsolutePath());
 
 		lookData2 = new LookData();
 		lookData2.setLookFilename(imageFile2.getName());
-		lookData2.setLookName(SECOND_TEST_LOOK_NAME);
+		lookData2.setName(SECOND_TEST_LOOK_NAME);
 		lookDataList.add(lookData2);
 
 		projectManager.getFileChecksumContainer().addChecksum(lookData2.getChecksum(), lookData2.getAbsolutePath());
 
 		lookData3 = new LookData();
 		lookData3.setLookFilename(imageFileJpg.getName());
-		lookData3.setLookName(THIRD_TEST_LOOK_NAME);
+		lookData3.setName(THIRD_TEST_LOOK_NAME);
 
 		UtilUi.updateScreenWidthAndHeight(solo.getCurrentActivity());
 		projectManager.getCurrentProject().getXmlHeader().virtualScreenWidth = ScreenValues.SCREEN_WIDTH;
@@ -751,10 +751,10 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		Sprite firstSprite = projectManager.getCurrentProject().getDefaultScene().getSpriteList().get(0);
 		LookData lookToDelete = firstSprite.getLookDataList().get(1);
 
-		Log.d(TAG, "Look to delete: " + lookToDelete.getLookName());
+		Log.d(TAG, "Look to delete: " + lookToDelete.getName());
 
 		String testLookName = SECOND_TEST_LOOK_NAME;
-		assertEquals("The two names should be equal", testLookName, lookToDelete.getLookName());
+		assertEquals("The two names should be equal", testLookName, lookToDelete.getName());
 
 		LookAdapter adapter = getLookAdapter();
 		assertNotNull("Could not get Adapter", adapter);
@@ -795,20 +795,20 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.goBack();
 		solo.clickOnText(solo.getString(R.string.backgrounds));
 
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(0).getLookName(), FIRST_TEST_LOOK_NAME);
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(1).getLookName(), SECOND_TEST_LOOK_NAME);
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(2).getLookName(), "TestLook0");
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(3).getLookName(), "TestLook1");
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(4).getLookName(), "TestLook2");
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(0).getName(), FIRST_TEST_LOOK_NAME);
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(1).getName(), SECOND_TEST_LOOK_NAME);
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(2).getName(), "TestLook0");
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(3).getName(), "TestLook1");
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(4).getName(), "TestLook2");
 
 		ArrayList<Integer> yPositionList = UiTestUtils.getListItemYPositions(solo, 1);
 		UiTestUtils.longClickAndDrag(solo, 10, yPositionList.get(1), 10, yPositionList.get(4) + 100, 20);
 
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(0).getLookName(), FIRST_TEST_LOOK_NAME);
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(1).getLookName(), "TestLook0");
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(2).getLookName(), "TestLook1");
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(3).getLookName(), SECOND_TEST_LOOK_NAME);
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(4).getLookName(), "TestLook2");
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(0).getName(), FIRST_TEST_LOOK_NAME);
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(1).getName(), "TestLook0");
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(2).getName(), "TestLook1");
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(3).getName(), SECOND_TEST_LOOK_NAME);
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(4).getName(), "TestLook2");
 	}
 
 	public void testDragAndDropUp() {
@@ -819,20 +819,20 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.goBack();
 		solo.clickOnText(solo.getString(R.string.backgrounds));
 
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(0).getLookName(), FIRST_TEST_LOOK_NAME);
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(1).getLookName(), SECOND_TEST_LOOK_NAME);
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(2).getLookName(), "TestLook0");
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(3).getLookName(), "TestLook1");
-		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(4).getLookName(), "TestLook2");
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(0).getName(), FIRST_TEST_LOOK_NAME);
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(1).getName(), SECOND_TEST_LOOK_NAME);
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(2).getName(), "TestLook0");
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(3).getName(), "TestLook1");
+		assertEquals("Wrong List before DragAndDropTest", lookDataList.get(4).getName(), "TestLook2");
 
 		ArrayList<Integer> yPositionList = UiTestUtils.getListItemYPositions(solo, 1);
 		UiTestUtils.longClickAndDrag(solo, 10, yPositionList.get(4), 10, yPositionList.get(1) - 100, 20);
 
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(0).getLookName(), FIRST_TEST_LOOK_NAME);
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(1).getLookName(), SECOND_TEST_LOOK_NAME);
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(2).getLookName(), "TestLook2");
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(3).getLookName(), "TestLook0");
-		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(4).getLookName(), "TestLook1");
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(0).getName(), FIRST_TEST_LOOK_NAME);
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(1).getName(), SECOND_TEST_LOOK_NAME);
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(2).getName(), "TestLook2");
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(3).getName(), "TestLook0");
+		assertEquals("Wrong List after DragAndDropTest", lookDataList.get(4).getName(), "TestLook1");
 	}
 
 	public void testShowAndHideDetails() {
@@ -879,7 +879,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.sleep(TIME_TO_WAIT);
 		int numberLooksAfter = ProjectManager.getInstance().getCurrentSprite().getLookDataList().size();
 		assertEquals("No Look was added from Media Library!", numberLooksBefore + 1, numberLooksAfter);
-		String newLookName = ProjectManager.getInstance().getCurrentSprite().getLookDataList().get(numberLooksBefore).getLookName();
+		String newLookName = ProjectManager.getInstance().getCurrentSprite().getLookDataList().get(numberLooksBefore).getName();
 		assertEquals("Temp File was not deleted!", false, UiTestUtils.checkTempFileFromMediaLibrary(Constants
 				.TMP_LOOKS_PATH, newLookName));
 		solo.sleep(TIME_TO_WAIT);
@@ -905,7 +905,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		numberLooksAfter = ProjectManager.getInstance().getCurrentSprite().getLookDataList().size();
 		assertEquals("Look was added from Media Library!", numberLooksBefore + 1, numberLooksAfter);
 		newLookName = ProjectManager.getInstance().getCurrentSprite().getLookDataList().get(numberLooksBefore)
-				.getLookName();
+				.getName();
 		assertEquals("Temp File was not deleted!", false, UiTestUtils.checkTempFileFromMediaLibrary(Constants
 				.TMP_LOOKS_PATH, newLookName));
 		solo.sleep(TIME_TO_WAIT);
@@ -934,9 +934,9 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.sleep(TIME_TO_WAIT);
 		numberLooksAfter = ProjectManager.getInstance().getCurrentSprite().getLookDataList().size();
 		assertEquals("Second Look was not added from Media Library!", numberLooksBefore + 2, numberLooksAfter);
-		newLookName = ProjectManager.getInstance().getCurrentSprite().getLookDataList().get(numberLooksBefore).getLookName();
+		newLookName = ProjectManager.getInstance().getCurrentSprite().getLookDataList().get(numberLooksBefore).getName();
 		assertEquals("Temp File was not deleted!", false, UiTestUtils.checkTempFileFromMediaLibrary(Constants.TMP_LOOKS_PATH, newLookName));
-		newLookName = ProjectManager.getInstance().getCurrentSprite().getLookDataList().get(numberLooksBefore + 1).getLookName();
+		newLookName = ProjectManager.getInstance().getCurrentSprite().getLookDataList().get(numberLooksBefore + 1).getName();
 		assertEquals("Temp File was not deleted!", false, UiTestUtils.checkTempFileFromMediaLibrary(Constants.TMP_LOOKS_PATH, newLookName));
 	}
 
@@ -1266,7 +1266,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		LookData lookDataToAdd = new LookData();
 		lookDataToAdd.setLookFilename(tempImageFile.getName());
-		lookDataToAdd.setLookName("justforthistest");
+		lookDataToAdd.setName("justforthistest");
 
 		lookDataList.add(lookDataToAdd);
 		projectManager.getFileChecksumContainer().addChecksum(lookDataToAdd.getChecksum(),
@@ -1539,7 +1539,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.sleep(300);
 		lookDataList = projectManager.getCurrentSprite().getLookDataList();
 		assertEquals("Look is not correctly renamed in lookDataList (1 should be appended)", expectedNewLookName,
-				lookDataList.get(checkboxIndex).getLookName());
+				lookDataList.get(checkboxIndex).getName());
 		assertTrue("Look not renamed in actual view", solo.searchText(expectedNewLookName, true));
 	}
 
@@ -2135,7 +2135,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 	private String getLookName(int lookIndex) {
 		lookDataList = projectManager.getCurrentSprite().getLookDataList();
-		return lookDataList.get(lookIndex).getLookName();
+		return lookDataList.get(lookIndex).getName();
 	}
 
 	private void checkIfCheckboxesAreCorrectlyChecked(boolean firstCheckboxExpectedChecked,
@@ -2172,7 +2172,7 @@ public class LookFragmentTest extends BaseActivityInstrumentationTestCase<MainMe
 
 	private void addLookWithName(String lookName) {
 		LookData lookDataToAdd = lookData.clone();
-		lookDataToAdd.setLookName(lookName);
+		lookDataToAdd.setName(lookName);
 		lookDataList.add(lookDataToAdd);
 	}
 }

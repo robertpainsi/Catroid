@@ -237,7 +237,7 @@ public final class BackPackSceneController {
 		if (clonedScene == null) {
 			return null;
 		}
-		clonedScene.setSceneName(newName);
+		clonedScene.setName(newName);
 		clonedScene.isBackPackScene = false;
 		clonedScene.setProject(projectManager.getCurrentProject());
 		clonedScene.getDataContainer().setProject(projectManager.getCurrentProject());

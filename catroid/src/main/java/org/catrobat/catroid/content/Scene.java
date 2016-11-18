@@ -308,7 +308,7 @@ public class Scene implements Serializable {
 		return true;
 	}
 
-	public synchronized void setSceneName(String name) {
+	public synchronized void setName(String name) {
 		sceneName = name;
 	}
 

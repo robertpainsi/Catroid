@@ -145,7 +145,7 @@ public class BackPackLookListFragment extends BackPackActivityFragment implement
 		super.onCreateContextMenu(menu, view, menuInfo);
 
 		lookToEdit = lookAdapter.getItem(selectedLookPosition);
-		menu.setHeaderTitle(lookToEdit.getLookName());
+		menu.setHeaderTitle(lookToEdit.getName());
 
 		getActivity().getMenuInflater().inflate(R.menu.context_menu_unpacking, menu);
 	}

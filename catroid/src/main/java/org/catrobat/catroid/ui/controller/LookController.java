@@ -103,7 +103,7 @@ public final class LookController {
 		holder.lookNameTextView.setTag(position);
 		holder.lookElement.setTag(position);
 		holder.lookImageView.setImageBitmap(lookData.getThumbnailBitmap());
-		holder.lookNameTextView.setText(lookData.getLookName());
+		holder.lookNameTextView.setText(lookData.getName());
 
 		boolean checkboxIsVisible = handleCheckboxes(position, holder, lookAdapter);
 		handleDetails(lookData, holder, lookAdapter);
@@ -245,7 +245,7 @@ public final class LookController {
 	public LookData updateLookBackPackAfterUnpacking(LookData lookData, LookBaseAdapter adapter, String name, boolean
 			delete, String existingFileNameInProjectDirectory, boolean fromHiddenBackPack) {
 		LookData newLookData = new LookData();
-		newLookData.setLookName(name);
+		newLookData.setName(name);
 
 		if (existingFileNameInProjectDirectory == null) {
 			String fileName = lookData.getLookFileName();
@@ -290,7 +290,7 @@ public final class LookController {
 		}
 
 		lookData.setLookFilename(fileName);
-		lookData.setLookName(name);
+		lookData.setName(name);
 		lookDataList.add(lookData);
 		fragment.updateLookAdapter(lookData);
 
@@ -586,7 +586,7 @@ public final class LookController {
 
 	public void showBackPackReplaceDialog(final LookData currentLookData, final Context context) {
 		Resources resources = context.getResources();
-		String replaceLookMessage = resources.getString(R.string.backpack_replace_look, currentLookData.getLookName());
+		String replaceLookMessage = resources.getString(R.string.backpack_replace_look, currentLookData.getName());
 
 		AlertDialog dialog = new CustomAlertDialogBuilder(context)
 				.setTitle(R.string.backpack)
@@ -609,7 +609,7 @@ public final class LookController {
 	}
 
 	public void backPackVisibleLook(LookData currentLookData) {
-		String lookDataName = currentLookData.getLookName();
+		String lookDataName = currentLookData.getName();
 		BackPackListManager.getInstance().removeItemFromLookBackPackByLookName(lookDataName);
 		backPack(currentLookData, lookDataName, false);
 	}
@@ -673,7 +673,7 @@ public final class LookController {
 	public LookData updateLookBackPackAfterInsertion(String title, LookData currentLookData, String existingFileNameInBackPackDirectory, boolean addToHiddenBackpack) {
 		LookData newLookData = new LookData();
 		newLookData.isBackpackLookData = true;
-		newLookData.setLookName(title);
+		newLookData.setName(title);
 
 		if (existingFileNameInBackPackDirectory == null) {
 			if (currentLookData != null) {
@@ -712,7 +712,7 @@ public final class LookController {
 			String sceneName = ProjectManager.getInstance().getCurrentScene().getName();
 
 			StorageHandler.getInstance().copyImage(projectName, sceneName, lookData.getAbsolutePath(), null);
-			String imageName = lookData.getLookName() + "_" + activity.getString(R.string.copy_addition);
+			String imageName = lookData.getName() + "_" + activity.getString(R.string.copy_addition);
 			String imageFileName = lookData.getLookFileName();
 
 			updateLookAdapter(imageName, imageFileName, lookDataList, fragment);

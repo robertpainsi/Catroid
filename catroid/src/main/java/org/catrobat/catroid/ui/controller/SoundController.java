@@ -210,7 +210,7 @@ public final class SoundController {
 			return;
 		}
 		holder.playAndStopButton.setTag(position);
-		holder.titleTextView.setText(soundInfo.getTitle());
+		holder.titleTextView.setText(soundInfo.getName());
 
 		handleCheckboxes(position, holder, soundAdapter);
 		handleSoundInfo(holder, soundInfo, soundAdapter, position, context);
@@ -421,7 +421,7 @@ public final class SoundController {
 		} catch (IOException ioException) {
 			Log.e(TAG, Log.getStackTraceString(ioException));
 		}
-		return updateSoundAdapter(selectedSoundInfo.getTitle(), selectedSoundInfo.getSoundFileName(), soundInfoList,
+		return updateSoundAdapter(selectedSoundInfo.getName(), selectedSoundInfo.getSoundFileName(), soundInfoList,
 				fragment);
 	}
 
@@ -476,7 +476,7 @@ public final class SoundController {
 			existingFileNameInBackPackDirectory, boolean addToHiddenBackpack) {
 		SoundInfo newSoundInfo = new SoundInfo();
 		newSoundInfo.setBackpackSoundInfo(true);
-		newSoundInfo.setTitle(title);
+		newSoundInfo.setName(title);
 
 		if (existingFileNameInBackPackDirectory == null) {
 			if (currentSoundInfo != null) {
@@ -501,7 +501,7 @@ public final class SoundController {
 	public SoundInfo updateSoundAdapter(SoundInfo soundInfo,
 			SoundBaseAdapter adapter, String title, boolean delete, boolean fromHiddenBackPack) {
 		SoundInfo newSoundInfo = new SoundInfo();
-		newSoundInfo.setTitle(title);
+		newSoundInfo.setName(title);
 		String fileName = soundInfo.getSoundFileName();
 		String fileFormat = fileName.substring(fileName.lastIndexOf('.'), fileName.length());
 		fileName = fileName.substring(0, fileName.indexOf('_') + 1) + title + fileFormat;
@@ -672,12 +672,12 @@ public final class SoundController {
 			fragment) {
 		SoundInfo soundInfoToCheck = new SoundInfo();
 		soundInfoToCheck.setSoundFileName(fileName);
-		soundInfoToCheck.setTitle(name);
+		soundInfoToCheck.setName(name);
 		name = Utils.getUniqueSoundName(soundInfoToCheck, false);
 
 		SoundInfo soundInfo = new SoundInfo();
 		soundInfo.setSoundFileName(fileName);
-		soundInfo.setTitle(name);
+		soundInfo.setName(name);
 		soundList.add(soundInfo);
 
 		fragment.updateSoundAdapter(soundInfo);
@@ -728,7 +728,7 @@ public final class SoundController {
 
 	public void showBackPackReplaceDialog(final SoundInfo currentSoundInfo, final Context context) {
 		Resources resources = context.getResources();
-		String replaceLookMessage = resources.getString(R.string.backpack_replace_sound, currentSoundInfo.getTitle());
+		String replaceLookMessage = resources.getString(R.string.backpack_replace_sound, currentSoundInfo.getName());
 
 		AlertDialog dialog = new CustomAlertDialogBuilder(context)
 				.setTitle(R.string.backpack)
@@ -751,7 +751,7 @@ public final class SoundController {
 	}
 
 	public void backPackVisibleSound(SoundInfo selectedSoundInfo) {
-		String soundInfoTitle = selectedSoundInfo.getTitle();
+		String soundInfoTitle = selectedSoundInfo.getName();
 		BackPackListManager.getInstance().removeItemFromSoundBackPackBySoundTitle(soundInfoTitle);
 		backPack(selectedSoundInfo, soundInfoTitle, false);
 	}

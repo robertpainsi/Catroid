@@ -622,7 +622,7 @@ public final class Utils {
 			newName = name + "_" + nextNumber;
 		}
 		for (NfcTagData nfcTagData : nfcTagDataList) {
-			if (nfcTagData.getNfcTagName().equals(newName)) {
+			if (nfcTagData.getName().equals(newName)) {
 				return searchForNonExistingNfcTagName(name, ++nextNumber);
 			}
 		}
@@ -644,12 +644,12 @@ public final class Utils {
 		}
 
 		if (nextNumber == 0) {
-			newName = originalLookData.getLookName();
+			newName = originalLookData.getName();
 		} else {
-			newName = originalLookData.getLookName() + "_" + nextNumber;
+			newName = originalLookData.getName() + "_" + nextNumber;
 		}
 		for (LookData lookData : lookDataList) {
-			if (lookData.getLookName().equals(newName)) {
+			if (lookData.getName().equals(newName)) {
 				return searchForNonExistingLookName(originalLookData, ++nextNumber, forBackPack);
 			}
 		}
@@ -768,15 +768,15 @@ public final class Utils {
 
 		if (nextNumber == 0) {
 			if (soundInfo != null) {
-				newTitle = soundInfo.getTitle();
+				newTitle = soundInfo.getName();
 			}
 		} else {
 			if (soundInfo != null) {
-				newTitle = soundInfo.getTitle() + "_" + nextNumber;
+				newTitle = soundInfo.getName() + "_" + nextNumber;
 			}
 		}
 		for (SoundInfo soundInfoFromList : soundInfoList) {
-			if (soundInfoFromList.getTitle().equals(newTitle)) {
+			if (soundInfoFromList.getName().equals(newTitle)) {
 				return searchForNonExistingSoundTitle(soundInfo, ++nextNumber, forBackPack);
 			}
 		}
@@ -851,8 +851,8 @@ public final class Utils {
 
 					result &= standardLook.equals(lookToCheck);
 					if (!result) {
-						Log.e(TAG, "isStandardScene: " + standardLook.getLookName() + " was not the same as "
-								+ lookToCheck.getLookName());
+						Log.e(TAG, "isStandardScene: " + standardLook.getName() + " was not the same as "
+								+ lookToCheck.getName());
 						return false;
 					}
 				}
@@ -863,8 +863,8 @@ public final class Utils {
 
 					result &= standardSound.equals(soundToCheck);
 					if (!result) {
-						Log.e(TAG, "isStandardScene: " + standardSound.getTitle() + " was not the same as "
-								+ standardSound.getTitle());
+						Log.e(TAG, "isStandardScene: " + standardSound.getName() + " was not the same as "
+								+ standardSound.getName());
 						return false;
 					}
 				}
@@ -949,7 +949,7 @@ public final class Utils {
 
 	public static boolean checkIfLookExists(String name) {
 		for (LookData lookData : ProjectManager.getInstance().getCurrentSprite().getLookDataList()) {
-			if (lookData.getLookName().compareTo(name) == 0) {
+			if (lookData.getName().compareTo(name) == 0) {
 				return true;
 			}
 		}
@@ -958,7 +958,7 @@ public final class Utils {
 
 	public static boolean checkIfSoundExists(String name) {
 		for (SoundInfo soundInfo : ProjectManager.getInstance().getCurrentSprite().getSoundList()) {
-			if (soundInfo.getTitle().compareTo(name) == 0) {
+			if (soundInfo.getName().compareTo(name) == 0) {
 				return true;
 			}
 		}

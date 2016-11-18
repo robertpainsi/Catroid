@@ -275,7 +275,7 @@ public class SceneListFragment extends ListActivityFragment implements CheckBoxL
 			return false;
 		}
 
-		copiedScene.setSceneName(sceneName);
+		copiedScene.setName(sceneName);
 		copiedScene.setProject(projectManager.getCurrentProject());
 		projectManager.addScene(copiedScene);
 

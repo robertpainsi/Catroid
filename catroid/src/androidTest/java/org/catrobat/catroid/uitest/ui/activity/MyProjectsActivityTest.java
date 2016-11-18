@@ -2092,7 +2092,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 		backgroundGreen = new LookData();
 		backgroundGreen.setLookFilename(imageFile1.getName());
-		backgroundGreen.setLookName("backgroundGreen");
+		backgroundGreen.setName("backgroundGreen");
 		lookDataList.add(backgroundGreen);
 
 		projectManager.getFileChecksumContainer().addChecksum(backgroundGreen.getChecksum(),
@@ -2100,7 +2100,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 
 		backgroundRed = new LookData();
 		backgroundRed.setLookFilename(imageFile2.getName());
-		backgroundRed.setLookName("backgroundRed");
+		backgroundRed.setName("backgroundRed");
 		lookDataList.add(backgroundRed);
 
 		projectManager.getFileChecksumContainer().addChecksum(backgroundRed.getChecksum(),
@@ -2200,7 +2200,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		List<LookData> lookDataList = projectManager.getCurrentSprite().getLookDataList();
 		LookData lookData = new LookData();
 		lookData.setLookFilename(imageFile.getName());
-		lookData.setLookName("testname");
+		lookData.setName("testname");
 		lookDataList.add(lookData);
 		projectManager.getFileChecksumContainer().addChecksum(lookData.getChecksum(), lookData.getAbsolutePath());
 
@@ -2244,7 +2244,7 @@ public class MyProjectsActivityTest extends BaseActivityInstrumentationTestCase<
 		List<LookData> lookDataList = projectManager.getCurrentSprite().getLookDataList();
 		LookData lookData = new LookData();
 		lookData.setLookFilename(imageFile.getName());
-		lookData.setLookName("testname");
+		lookData.setName("testname");
 		lookDataList.add(lookData);
 		projectManager.getFileChecksumContainer().addChecksum(lookData.getChecksum(), lookData.getAbsolutePath());
 

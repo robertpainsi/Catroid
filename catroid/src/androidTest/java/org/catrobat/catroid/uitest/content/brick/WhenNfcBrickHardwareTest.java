@@ -134,8 +134,8 @@ public class WhenNfcBrickHardwareTest extends BaseActivityInstrumentationTestCas
 
 		WhenNfcScript script = (WhenNfcScript)ProjectManager.getInstance().getCurrentSprite().getScript(0);
 		assertEquals("Wrong tag used in stage --> Problem with Adapter update in Script", script.isMatchAll(), false);
-		String tagName = ProjectManager.getInstance().getCurrentSprite().getNfcTagList().get(0).getNfcTagName();
-		assertEquals("Wrong tag name set in stage", tagName, tagDataList.get(0).getNfcTagName());
+		String tagName = ProjectManager.getInstance().getCurrentSprite().getNfcTagList().get(0).getName();
+		assertEquals("Wrong tag name set in stage", tagName, tagDataList.get(0).getName());
 		assertEquals("Wrong tag name set in stage", tagName, FIRST_TEST_TAG_NAME);
 
 		solo.sleep(2000);
@@ -204,12 +204,12 @@ public class WhenNfcBrickHardwareTest extends BaseActivityInstrumentationTestCas
 		tagDataList = projectManager.getCurrentSprite().getNfcTagList();
 
 		NfcTagData tagData = new NfcTagData();
-		tagData.setNfcTagName(FIRST_TEST_TAG_NAME);
+		tagData.setName(FIRST_TEST_TAG_NAME);
 		tagData.setNfcTagUid(FIRST_TEST_TAG_ID);
 		tagDataList.add(tagData);
 
 		NfcTagData tagData2 = new NfcTagData();
-		tagData2.setNfcTagName(SECOND_TEST_TAG_NAME);
+		tagData2.setName(SECOND_TEST_TAG_NAME);
 		tagData2.setNfcTagUid(SECOND_TEST_TAG_ID);
 		tagDataList.add(tagData2);
 
@@ -219,7 +219,7 @@ public class WhenNfcBrickHardwareTest extends BaseActivityInstrumentationTestCas
 				RESOURCE_SOUND, getInstrumentation().getContext(), UiTestUtils.FileTypes.SOUND);
 		SoundInfo soundInfo = new SoundInfo();
 		soundInfo.setSoundFileName(soundFile.getName());
-		soundInfo.setTitle(soundName);
+		soundInfo.setName(soundName);
 
 		soundInfoList.add(soundInfo);
 		ProjectManager.getInstance().getFileChecksumContainer()

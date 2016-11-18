@@ -2702,7 +2702,7 @@ public final class UiTestUtils {
 				imageResource, instrumentationContext, UiTestUtils.FileTypes.IMAGE);
 		LookData lookData = new LookData();
 		lookData.setLookFilename(imageFile.getName());
-		lookData.setLookName(testLookName);
+		lookData.setName(testLookName);
 		lookDataList.add(lookData);
 		projectManager.getFileChecksumContainer().addChecksum(lookData.getChecksum(), lookData.getAbsolutePath());
 
@@ -2711,7 +2711,7 @@ public final class UiTestUtils {
 				soundResource, instrumentationContext, UiTestUtils.FileTypes.SOUND);
 		SoundInfo soundInfo = new SoundInfo();
 		soundInfo.setSoundFileName(soundFile.getName());
-		soundInfo.setTitle(testSoundName);
+		soundInfo.setName(testSoundName);
 		soundInfoList.add(soundInfo);
 		projectManager.getFileChecksumContainer().addChecksum(soundInfo.getChecksum(), soundInfo.getAbsolutePath());
 

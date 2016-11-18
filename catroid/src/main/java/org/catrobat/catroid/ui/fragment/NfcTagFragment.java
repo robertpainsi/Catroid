@@ -256,7 +256,7 @@ public class NfcTagFragment extends ScriptActivityFragment implements NfcTagBase
 		if (uid != null) {
 			NfcTagData newNfcTagData = new NfcTagData();
 			String newTagName = Utils.getUniqueNfcTagName(getString(R.string.default_tag_name));
-			newNfcTagData.setNfcTagName(newTagName);
+			newNfcTagData.setName(newTagName);
 			newNfcTagData.setNfcTagUid(uid);
 			adapter.add(newNfcTagData);
 			adapter.notifyDataSetChanged();
@@ -456,7 +456,7 @@ public class NfcTagFragment extends ScriptActivityFragment implements NfcTagBase
 
 	@Override
 	public void showRenameDialog() {
-		RenameNfcTagDialog renameNfcTagDialog = RenameNfcTagDialog.newInstance(selectedNfcTag.getNfcTagName());
+		RenameNfcTagDialog renameNfcTagDialog = RenameNfcTagDialog.newInstance(selectedNfcTag.getName());
 		renameNfcTagDialog.show(getFragmentManager(), RenameNfcTagDialog.DIALOG_FRAGMENT_TAG);
 	}
 
@@ -473,7 +473,7 @@ public class NfcTagFragment extends ScriptActivityFragment implements NfcTagBase
 				String newTagName = intent.getExtras().getString(RenameNfcTagDialog.EXTRA_NEW_NFCTAG_TITLE);
 
 				if (newTagName != null && !newTagName.equalsIgnoreCase("") && !newTagName.equalsIgnoreCase(context.getString(R.string.brick_when_nfc_default_all))) {
-					selectedNfcTag.setNfcTagName(newTagName);
+					selectedNfcTag.setName(newTagName);
 					adapter.notifyDataSetChanged();
 				}
 			}

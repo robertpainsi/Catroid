@@ -160,7 +160,7 @@ public class BackPackSoundListFragment extends BackPackActivityFragment implemen
 		}
 
 		soundInfoToEdit = soundAdapter.getItem(selectedSoundPosition);
-		menu.setHeaderTitle(soundInfoToEdit.getTitle());
+		menu.setHeaderTitle(soundInfoToEdit.getName());
 
 		getActivity().getMenuInflater().inflate(R.menu.context_menu_unpacking, menu);
 	}

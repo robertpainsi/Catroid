@@ -127,7 +127,7 @@ public final class BackPackListManager {
 
 	public void removeItemFromLookBackPackByLookName(String name) {
 		for (LookData lookData : getBackpack().backpackedLooks) {
-			if (lookData.getLookName().equals(name)) {
+			if (lookData.getName().equals(name)) {
 				getBackpack().backpackedLooks.remove(lookData);
 			}
 		}
@@ -152,7 +152,7 @@ public final class BackPackListManager {
 
 	public void removeItemFromSoundBackPackBySoundTitle(String title) {
 		for (SoundInfo soundInfo : getBackpack().backpackedSounds) {
-			if (soundInfo.getTitle().equals(title)) {
+			if (soundInfo.getName().equals(title)) {
 				getBackpack().backpackedSounds.remove(soundInfo);
 			}
 		}

@@ -180,11 +180,11 @@ public class LookData implements Serializable, Cloneable {
 		}
 	}
 
-	public String getLookName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setLookName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

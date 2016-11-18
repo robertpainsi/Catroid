@@ -96,7 +96,7 @@ public class DefaultProjectCreatorDrone extends DefaultProjectCreator {
 		Sprite sprite = spriteFactory.newInstance(SingleSprite.class.getSimpleName(), backgroundName);
 
 		LookData backgroundLookData = new DroneVideoLookData();
-		backgroundLookData.setLookName(context.getString(R.string.add_look_drone_video));
+		backgroundLookData.setName(context.getString(R.string.add_look_drone_video));
 		backgroundLookData.setLookFilename(backgroundFile.getName());
 		sprite.getLookDataList().add(backgroundLookData);
 
@@ -258,7 +258,7 @@ public class DefaultProjectCreatorDrone extends DefaultProjectCreator {
 		whenProjectStartsScript.addBrick(turnLeftBrick);
 
 		LookData lookData = new LookData();
-		lookData.setLookName(spriteName + " icon");
+		lookData.setName(spriteName + " icon");
 
 		lookData.setLookFilename(lookFile.getName());
 

@@ -238,7 +238,7 @@ public class LegoNXTImplTest extends BaseActivityInstrumentationTestCase<MainMen
 
 		LookData lookData = new LookData();
 		lookData.setLookFilename(image.getName());
-		lookData.setLookName(imageName);
+		lookData.setName(imageName);
 		setLookBrick.setLook(lookData);
 		firstSprite.getLookDataList().add(lookData);
 

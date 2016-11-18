@@ -97,8 +97,8 @@ public class WhenNfcBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		solo.sleep(1000);
 		Script script = ProjectManager.getInstance().getCurrentScene().getSpriteList().get(0).getScript(0);
-		assertEquals("tag not set", ((WhenNfcBrick) script.getScriptBrick()).getNfcTag().getNfcTagName(), tagDataList
-				.get(0).getNfcTagName());
+		assertEquals("tag not set", ((WhenNfcBrick) script.getScriptBrick()).getNfcTag().getName(), tagDataList
+				.get(0).getName());
 		solo.goBack();
 		solo.goBack();
 		solo.waitForActivity(ScriptActivity.class.getSimpleName());
@@ -112,8 +112,8 @@ public class WhenNfcBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		solo.sleep(1000);
 		script = ProjectManager.getInstance().getCurrentScene().getSpriteList().get(0).getScript(0);
-		assertEquals("tag not set", ((WhenNfcBrick) script.getScriptBrick()).getNfcTag().getNfcTagName(), tagDataList
-				.get(1).getNfcTagName());
+		assertEquals("tag not set", ((WhenNfcBrick) script.getScriptBrick()).getNfcTag().getName(), tagDataList
+				.get(1).getName());
 	}
 
 	public void testSpinnerUpdatesDelete() {
@@ -173,8 +173,8 @@ public class WhenNfcBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		UiTestUtils.clickOnBottomBar(solo, R.id.button_play);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
-		String tagName = ProjectManager.getInstance().getCurrentSprite().getNfcTagList().get(0).getNfcTagName();
-		assertEquals("Wrong tag name set in stage", tagName, tagDataList.get(0).getNfcTagName());
+		String tagName = ProjectManager.getInstance().getCurrentSprite().getNfcTagList().get(0).getName();
+		assertEquals("Wrong tag name set in stage", tagName, tagDataList.get(0).getName());
 		solo.sleep(500);
 		solo.goBack();
 		solo.sleep(100);
@@ -213,8 +213,8 @@ public class WhenNfcBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 
 		WhenNfcScript script = (WhenNfcScript) ProjectManager.getInstance().getCurrentSprite().getScript(0);
 		assertEquals("Wrong tag used in stage --> Problem with Adapter update in Script", script.isMatchAll(), false);
-		String tagName = ProjectManager.getInstance().getCurrentSprite().getNfcTagList().get(0).getNfcTagName();
-		assertEquals("Wrong tag name set in stage", tagName, tagDataList.get(0).getNfcTagName());
+		String tagName = ProjectManager.getInstance().getCurrentSprite().getNfcTagList().get(0).getName();
+		assertEquals("Wrong tag name set in stage", tagName, tagDataList.get(0).getName());
 		assertEquals("Wrong tag name set in stage", tagName, FIRST_TEST_TAG_NAME);
 
 		UiTestUtils.fakeNfcTag(solo, SECOND_TEST_TAG_ID, null, null);
@@ -319,7 +319,7 @@ public class WhenNfcBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		solo.sleep(5000);
 		solo.waitForActivity(StageActivity.class.getSimpleName());
 		solo.sleep(2000);
-		String tagName = ((WhenNfcBrick) ProjectManager.getInstance().getCurrentSprite().getScript(0).getScriptBrick()).getNfcTag().getNfcTagName();
+		String tagName = ((WhenNfcBrick) ProjectManager.getInstance().getCurrentSprite().getScript(0).getScriptBrick()).getNfcTag().getName();
 		assertEquals("Wrong tag used in stage --> Problem with Adapter update in Script", newTag, tagName);
 		solo.goBack();
 		solo.goBack();
@@ -346,12 +346,12 @@ public class WhenNfcBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 		tagDataList = projectManager.getCurrentSprite().getNfcTagList();
 
 		NfcTagData tagData = new NfcTagData();
-		tagData.setNfcTagName(FIRST_TEST_TAG_NAME);
+		tagData.setName(FIRST_TEST_TAG_NAME);
 		tagData.setNfcTagUid(NfcHandler.byteArrayToHex(FIRST_TEST_TAG_ID.getBytes()));
 		tagDataList.add(tagData);
 
 		NfcTagData tagData2 = new NfcTagData();
-		tagData2.setNfcTagName(SECOND_TEST_TAG_NAME);
+		tagData2.setName(SECOND_TEST_TAG_NAME);
 		tagData2.setNfcTagUid(NfcHandler.byteArrayToHex(SECOND_TEST_TAG_ID.getBytes()));
 		tagDataList.add(tagData2);
 
@@ -361,7 +361,7 @@ public class WhenNfcBrickTest extends BaseActivityInstrumentationTestCase<MainMe
 				RESOURCE_SOUND, getInstrumentation().getContext(), UiTestUtils.FileTypes.SOUND);
 		SoundInfo soundInfo = new SoundInfo();
 		soundInfo.setSoundFileName(soundFile.getName());
-		soundInfo.setTitle(soundName);
+		soundInfo.setName(soundName);
 
 		soundInfoList.add(soundInfo);
 		ProjectManager.getInstance().getFileChecksumContainer()

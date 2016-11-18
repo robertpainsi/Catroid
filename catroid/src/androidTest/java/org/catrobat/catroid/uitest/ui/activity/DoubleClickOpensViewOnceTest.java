@@ -531,7 +531,7 @@ public class DoubleClickOpensViewOnceTest extends TestSuite {
 			List<LookData> lookDataList = ProjectManager.getInstance().getCurrentSprite().getLookDataList();
 			LookData lookData = new LookData();
 			lookData.setLookFilename(imageFile.getName());
-			lookData.setLookName(FIRST_TEST_LOOK_NAME);
+			lookData.setName(FIRST_TEST_LOOK_NAME);
 			lookDataList.add(lookData);
 
 			super.setUp();

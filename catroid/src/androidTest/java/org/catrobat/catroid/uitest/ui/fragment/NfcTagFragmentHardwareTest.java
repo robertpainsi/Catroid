@@ -83,12 +83,12 @@ public class NfcTagFragmentHardwareTest extends BaseActivityInstrumentationTestC
 		tagDataList = projectManager.getCurrentSprite().getNfcTagList();
 
 		tagData = new NfcTagData();
-		tagData.setNfcTagName(FIRST_TEST_TAG_NAME);
+		tagData.setName(FIRST_TEST_TAG_NAME);
 		tagData.setNfcTagUid(FIRST_TEST_TAG_ID);
 		tagDataList.add(tagData);
 
 		tagData2 = new NfcTagData();
-		tagData2.setNfcTagName(SECOND_TEST_TAG_NAME);
+		tagData2.setName(SECOND_TEST_TAG_NAME);
 		tagData2.setNfcTagUid(SECOND_TEST_TAG_ID);
 		tagDataList.add(tagData2);
 

@@ -142,30 +142,30 @@ public class DefaultProjectCreatorDefault extends DefaultProjectCreator {
 					soundFile1.getName(), soundFile2.getName()));
 
 			LookData backgroundLookData = new LookData();
-			backgroundLookData.setLookName(backgroundName);
+			backgroundLookData.setName(backgroundName);
 			backgroundLookData.setLookFilename(backgroundFile.getName());
 
 			Sprite backgroundSprite = defaultProject.getDefaultScene().getSpriteList().get(0);
 			backgroundSprite.getLookDataList().add(backgroundLookData);
 
 			LookData birdWingUpLookData = new LookData();
-			birdWingUpLookData.setLookName(birdWingUpLookName);
+			birdWingUpLookData.setName(birdWingUpLookName);
 			birdWingUpLookData.setLookFilename(birdWingUpFile.getName());
 
 			LookData birdWingDownLookData = new LookData();
-			birdWingDownLookData.setLookName(birdWingDownLookName);
+			birdWingDownLookData.setName(birdWingDownLookName);
 			birdWingDownLookData.setLookFilename(birdWingDownFile.getName());
 
 			LookData cloudLookData = new LookData();
-			cloudLookData.setLookName(cloudName);
+			cloudLookData.setName(cloudName);
 			cloudLookData.setLookFilename(cloudFile.getName());
 
 			SoundInfo soundInfo1 = new SoundInfo();
-			soundInfo1.setTitle(tweet1);
+			soundInfo1.setName(tweet1);
 			soundInfo1.setSoundFileName(soundFile1.getName());
 
 			SoundInfo soundInfo2 = new SoundInfo();
-			soundInfo2.setTitle(tweet2);
+			soundInfo2.setName(tweet2);
 			soundInfo2.setSoundFileName(soundFile2.getName());
 
 			ProjectManager.getInstance().getFileChecksumContainer().addChecksum(soundInfo1.getChecksum(), soundInfo1.getAbsolutePath());
