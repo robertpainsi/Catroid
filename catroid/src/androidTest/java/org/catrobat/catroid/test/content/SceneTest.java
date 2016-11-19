@@ -188,9 +188,9 @@ public class SceneTest extends AndroidTestCase {
 				.getInstance().backPackedScenesContains(hiddenBackPackedScene1, false));
 
 		String unpackedHiddenSceneName1 = Utils.getUniqueName(hiddenBackPackedScene1,
-				ProjectManager.getInstance().getCurrentProject().getSceneList());
+				ProjectManager.getInstance().getCurrentProject().getSceneList(), true);
 		String unpackedHiddenSceneName2 = Utils.getUniqueName(hiddenBackPackedScene2,
-				ProjectManager.getInstance().getCurrentProject().getSceneList());
+				ProjectManager.getInstance().getCurrentProject().getSceneList(), true);
 
 		Scene unpackedScene = BackPackSceneController.getInstance().unpackScene(backPackedScene);
 		assertNotNull("unpacked scene was null", unpackedScene);
