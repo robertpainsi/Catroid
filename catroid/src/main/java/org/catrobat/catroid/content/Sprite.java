@@ -58,6 +58,7 @@ import org.catrobat.catroid.physics.PhysicsLook;
 import org.catrobat.catroid.physics.PhysicsWorld;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.ui.fragment.SpriteFactory;
+import org.catrobat.catroid.utils.Utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -779,21 +780,11 @@ public class Sprite implements Serializable, Cloneable, Nameable {
 	}
 
 	public boolean containsLookData(LookData lookData) {
-		for (LookData lookOfSprite : lookList) {
-			if (lookOfSprite.equals(lookData)) {
-				return true;
-			}
-		}
-		return false;
+		return Utils.containsName(lookData, lookList);
 	}
 
 	public boolean existSoundInfoByName(SoundInfo sound) {
-		for (SoundInfo soundInfo : soundList) {
-			if (soundInfo.getName().equals(sound.getName())) {
-				return true;
-			}
-		}
-		return false;
+		return Utils.containsName(sound, soundList);
 	}
 
 	public boolean existSoundInfoByFileName(SoundInfo sound) {

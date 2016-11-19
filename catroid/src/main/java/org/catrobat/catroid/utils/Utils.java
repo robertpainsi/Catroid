@@ -60,7 +60,6 @@ import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.DefaultProjectHandler;
 import org.catrobat.catroid.common.LookData;
 import org.catrobat.catroid.common.Nameable;
-import org.catrobat.catroid.common.NfcTagData;
 import org.catrobat.catroid.common.ScratchProgramData;
 import org.catrobat.catroid.common.SoundInfo;
 import org.catrobat.catroid.content.Project;
@@ -74,7 +73,6 @@ import org.catrobat.catroid.ui.BaseExceptionHandler;
 import org.catrobat.catroid.ui.MainMenuActivity;
 import org.catrobat.catroid.ui.SettingsActivity;
 import org.catrobat.catroid.ui.WebViewActivity;
-import org.catrobat.catroid.ui.controller.BackPackListManager;
 import org.catrobat.catroid.ui.dialogs.CustomAlertDialogBuilder;
 import org.catrobat.catroid.web.ServerCalls;
 import org.catrobat.catroid.web.WebconnectionException;
@@ -795,13 +793,25 @@ public final class Utils {
 		return projectDirectory.exists();
 	}
 
+	public static boolean containsName(Nameable name, Iterable<? extends Nameable> items) {
+		return containsName(name.getName(), items);
+	}
+
 	public static boolean containsName(String name, Iterable<? extends Nameable> items) {
-		for (Nameable n : items) {
+		return getItemByName(name, items) != null;
+	}
+
+	public static <E extends Nameable> E getItemByName(Nameable name, Iterable<? extends E> items) {
+		return getItemByName(name.getName(), items);
+	}
+
+	public static <E extends Nameable> E getItemByName(String name, Iterable<? extends E> items) {
+		for (E n : items) {
 			if (name.equals(n.getName())) {
-				return true;
+				return n;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public static void invalidateLoginTokenIfUserRestricted(Context context) {

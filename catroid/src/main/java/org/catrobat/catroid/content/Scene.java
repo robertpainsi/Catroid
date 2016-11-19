@@ -453,14 +453,7 @@ public class Scene implements Serializable, Nameable {
 	}
 
 	public Sprite getSpriteBySpriteName(String searchedSprite) {
-		Sprite spriteBySpriteName = null;
-		for (Sprite sprite : spriteList) {
-			if (searchedSprite.equals(sprite.getName())) {
-				spriteBySpriteName = sprite;
-				break;
-			}
-		}
-		return spriteBySpriteName;
+		return Utils.getItemByName(searchedSprite, spriteList);
 	}
 
 	public synchronized void replaceBackgroundSprite(Sprite unpackedSprite) {
@@ -468,12 +461,7 @@ public class Scene implements Serializable, Nameable {
 	}
 
 	public boolean containsSprite(Sprite selectedSprite) {
-		for (Sprite sprite : spriteList) {
-			if (sprite.equals(selectedSprite)) {
-				return true;
-			}
-		}
-		return false;
+		return Utils.containsName(selectedSprite, spriteList);
 	}
 
 	public synchronized void correctUserVariableAndListReferences() {
