@@ -588,6 +588,36 @@ public final class Utils {
 		return stringToAdapt.replaceAll("[\"*/:<>?\\\\|]", "");
 	}
 
+	public static boolean checkIfProjectExistsOrIsDownloadingIgnoreCase(String programName) {
+		if (DownloadUtil.getInstance().isProgramNameInDownloadQueueIgnoreCase(programName)) {
+			return true;
+		}
+
+		File projectDirectory = new File(Utils.buildProjectPath(programName));
+		return projectDirectory.exists();
+	}
+
+	public static boolean containsName(Nameable name, Iterable<? extends Nameable> items) {
+		return containsName(name.getName(), items);
+	}
+
+	public static boolean containsName(String name, Iterable<? extends Nameable> items) {
+		return getItemByName(name, items) != null;
+	}
+
+	public static <E extends Nameable> E getItemByName(Nameable name, Iterable<? extends E> items) {
+		return getItemByName(name.getName(), items);
+	}
+
+	public static <E extends Nameable> E getItemByName(String name, Iterable<? extends E> items) {
+		for (E n : items) {
+			if (name.equals(n.getName())) {
+				return n;
+			}
+		}
+		return null;
+	}
+
 	public static String getUniqueName(Nameable item, Iterable<? extends Nameable> items) {
 		return getUniqueName(item, items, false);
 	}
@@ -782,36 +812,6 @@ public final class Utils {
 				return TRANSLATION_PLURAL_OTHER_INTEGER;
 			}
 		}
-	}
-
-	public static boolean checkIfProjectExistsOrIsDownloadingIgnoreCase(String programName) {
-		if (DownloadUtil.getInstance().isProgramNameInDownloadQueueIgnoreCase(programName)) {
-			return true;
-		}
-
-		File projectDirectory = new File(Utils.buildProjectPath(programName));
-		return projectDirectory.exists();
-	}
-
-	public static boolean containsName(Nameable name, Iterable<? extends Nameable> items) {
-		return containsName(name.getName(), items);
-	}
-
-	public static boolean containsName(String name, Iterable<? extends Nameable> items) {
-		return getItemByName(name, items) != null;
-	}
-
-	public static <E extends Nameable> E getItemByName(Nameable name, Iterable<? extends E> items) {
-		return getItemByName(name.getName(), items);
-	}
-
-	public static <E extends Nameable> E getItemByName(String name, Iterable<? extends E> items) {
-		for (E n : items) {
-			if (name.equals(n.getName())) {
-				return n;
-			}
-		}
-		return null;
 	}
 
 	public static void invalidateLoginTokenIfUserRestricted(Context context) {

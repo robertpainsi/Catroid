@@ -171,6 +171,29 @@ public class UtilsTest extends AndroidTestCase {
 		assertEquals("Strings are not equal!", "ThisIsA-  VeryVeryLong_Test_String", newString);
 	}
 
+	public void testContainsName() {
+		String name = "name";
+		assertTrue("Name not found in list",
+				Utils.containsName(name, toNameableList("hello", "name")));
+		assertFalse("Name shouldn't be in the list",
+				Utils.containsName(name, toNameableList("hello", "world")));
+	}
+
+	public void testGetItemByName() {
+		Nameable name = new NameableImpl("name");
+		List<Nameable> items = toNameableList("hello", "world");
+		items.add(name);
+
+		assertEquals("Name not found in list", name, Utils.getItemByName(name, items));
+	}
+
+	public void testGetItemByNameNotInList() {
+		Nameable name = new NameableImpl("name");
+		List<Nameable> items = toNameableList("hello", "world");
+
+		assertNull("Should return null of name is not in list", Utils.getItemByName(name, items));
+	}
+
 	public void testUniqueName() {
 		String name = "name";
 		assertEquals("The name shouldn't change if the name is not in the list",
