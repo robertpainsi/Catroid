@@ -56,59 +56,67 @@ import org.catrobat.catroid.uiespresso.content.brick.MoveNStepsBrickTest;
 import org.catrobat.catroid.uiespresso.content.brick.NextLookBrickTest;
 import org.catrobat.catroid.uiespresso.content.brick.NoteBrickTest;
 import org.catrobat.catroid.uiespresso.content.brick.SetColorBrickTest;
+import org.catrobat.catroid.uiespresso.content.brick.SetLookByIndexBrickTest;
 import org.catrobat.catroid.uiespresso.content.brick.StopScriptBrickTest;
 import org.catrobat.catroid.uiespresso.content.brick.WhenNfcBrickStageTest;
 import org.catrobat.catroid.uiespresso.content.brick.WhenNfcBrickTest;
 import org.catrobat.catroid.uiespresso.formulaeditor.FormulaEditorKeyboardTest;
 import org.catrobat.catroid.uiespresso.formulaeditor.FormulaEditorTest;
 import org.catrobat.catroid.uiespresso.pocketmusic.PocketMusicActivityTest;
+import org.catrobat.catroid.uiespresso.stage.BroadcastReceiverRegressionTest;
+import org.catrobat.catroid.uiespresso.stage.MultipleBroadcastsTest;
 import org.catrobat.catroid.uiespresso.stage.StageSimpleTest;
+import org.catrobat.catroid.uiespresso.ui.activity.SettingsActivityTest;
 import org.catrobat.catroid.uiespresso.ui.dialog.AboutDialogTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-		PocketMusicActivityTest.class,
-		SmokeTest.class,
 		FlakyTestTest.class,
-		WhenNfcBrickStageTest.class,
-		LegoEv3PlayToneBrickTest.class,
-		ComeToFrontBrickTest.class,
-		HideBrickTest.class,
-		ChangeTransparencyByNBrickTest.class,
-		DragNDropBricksTest.class,
-		GoNStepsBackTest.class,
-		ChangeVolumeByNBrickTest.class,
 		AskBrickTest.class,
 		BrickValueParameterTest.class,
-		NextLookBrickTest.class,
-		ChangeColorByNBrickTest.class,
-		DeleteItemOfUserListBrickTest.class,
-		StopScriptBrickTest.class,
-		GlideToBrickTest.class,
-		MoveNStepsBrickTest.class,
-		ChangeYByNBrickTest.class,
-		LegoNXTMotorStopBrickTest.class,
-		GoToBrickTest.class,
-		WhenNfcBrickTest.class,
-		LegoEV3SetLedBrickTest.class,
-		LegoEv3MotorMoveBrickTest.class,
-		NoteBrickTest.class,
-		LegoNxtPlayToneBrickTest.class,
 		ChangeBrightnessByNBrickTest.class,
-		ChangeXByNBrickTest.class,
-		SetColorBrickTest.class,
-		LegoEv3MotorStopBrickTest.class,
-		LegoNxtMotorTurnAngleBrickTest.class,
-		ForeverBrickTest.class,
+		ChangeColorByNBrickTest.class,
 		ChangeSizeByNBrickTest.class,
+		ChangeTransparencyByNBrickTest.class,
+		ChangeVolumeByNBrickTest.class,
+		ChangeXByNBrickTest.class,
+		ChangeYByNBrickTest.class,
 		ClearGraphicEffectBrickTest.class,
-		LegoNXTMotorMoveBrickTest.class,
+		ComeToFrontBrickTest.class,
+		DeleteItemOfUserListBrickTest.class,
+		DragNDropBricksTest.class,
+		ForeverBrickTest.class,
+		GlideToBrickTest.class,
+		GoNStepsBackTest.class,
+		GoToBrickTest.class,
+		HideBrickTest.class,
+		LegoEv3MotorMoveBrickTest.class,
+		LegoEv3MotorStopBrickTest.class,
 		LegoEv3MotorTurnAngleBrickTest.class,
-		StageSimpleTest.class,
+		LegoEv3PlayToneBrickTest.class,
+		LegoEV3SetLedBrickTest.class,
+		LegoNXTMotorMoveBrickTest.class,
+		LegoNXTMotorStopBrickTest.class,
+		LegoNxtMotorTurnAngleBrickTest.class,
+		LegoNxtPlayToneBrickTest.class,
+		MoveNStepsBrickTest.class,
+		NextLookBrickTest.class,
+		NoteBrickTest.class,
+		SetColorBrickTest.class,
+		SetLookByIndexBrickTest.class,
+		StopScriptBrickTest.class,
+		WhenNfcBrickStageTest.class,
+		WhenNfcBrickTest.class,
 		FormulaEditorKeyboardTest.class,
 		FormulaEditorTest.class,
+		PocketMusicActivityTest.class,
+		SmokeTest.class,
+		BroadcastReceiverRegressionTest.class,
+		MultipleBroadcastsTest.class,
+		StageSimpleTest.class,
+		SettingsActivityTest.class,
 		AboutDialogTest.class
 })
 public class AllEspressoTestsSuite {

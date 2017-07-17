@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMPORTS="$(find .. -name '*Test.java' | sed 's/\.\.\//import org.catrobat.catroid.uiespresso./' | sed 's/\//\./g' | sed 's/.java/;/' | sort)"
-IMPORTED_CLASSES="$(find .. -name '*Test.java' | sed 's/^.*\///' | sed 's/java/class/' | sed 's/$/,/' | sed '$s/,//' | sed 's/^/		/')"
+IMPORTED_CLASSES="$(find .. -name '*Test.java' | sort | sed 's/^.*\///' | sed 's/java/class/' | sed 's/$/,/' | sed '$s/,//' | sed 's/^/		/')"
 
 echo "/*
  * Catroid: An on-device visual programming system for Android devices
