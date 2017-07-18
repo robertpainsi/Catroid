@@ -56,6 +56,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
@@ -115,6 +116,15 @@ public class MainMenuActivity extends BaseCastActivity implements OnLoadProjectC
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (getIntent().getExtras() != null) {
+			try {
+				String link = getIntent().getExtras().get("link").toString();
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+			} catch (NullPointerException e) {
+				Log.e(TAG, "Url not found with notification", e);
+			}
+		}
+
 		if (!Utils.checkForExternalStorageAvailableAndDisplayErrorIfNot(this)) {
 			return;
 		}
@@ -123,10 +133,12 @@ public class MainMenuActivity extends BaseCastActivity implements OnLoadProjectC
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 		UtilUi.updateScreenWidthAndHeight(this);
 
+		Log.e(TAG, "Token : " + FirebaseInstanceId.getInstance().getToken());
+
 		if (STANDALONE_MODE) {
 			/*requestWindowFeature(Window.FEATURE_NO_TITLE);
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
+			WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
 			getActionBar().hide();
 			setContentView(R.layout.activity_main_menu_splashscreen);
 			unzipProgram();

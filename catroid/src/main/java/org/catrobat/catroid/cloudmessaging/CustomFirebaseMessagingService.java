@@ -69,9 +69,9 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 	}
 
 	private void sendNotification(String title, String message, Bitmap image, String link) {
-		Uri webPage = Uri.parse(link);
-		Intent intent = new Intent(Intent.ACTION_VIEW, webPage);
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 		Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
 		NotificationCompat.Builder notification = new NotificationCompat.Builder(this)
