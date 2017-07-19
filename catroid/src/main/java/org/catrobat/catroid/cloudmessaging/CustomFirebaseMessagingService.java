@@ -27,7 +27,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -46,29 +45,25 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 	@Override
 	public void onMessageReceived(RemoteMessage remoteMessage) {
 
-		CloudMessaging cloudMessaging = new CloudMessaging(this, remoteMessage);
+		CloudMessaging cloudMessaging = new CloudMessaging(remoteMessage);
 
 		String title = cloudMessaging.getTitle();
 		String message = cloudMessaging.getMessage();
-		String imageUrl = cloudMessaging.getImageUrl();
 		String webPageUrl = cloudMessaging.getWebPageUrl();
 
 		ArrayList<String> notificationData = new ArrayList<>();
 		notificationData.add(title);
 		notificationData.add(message);
-		notificationData.add(imageUrl);
 		notificationData.add(webPageUrl);
 
 		if (!cloudMessaging.isValidData(notificationData)) {
 			return;
 		}
 
-		Bitmap imageBitmap = cloudMessaging.getBitmap(imageUrl);
-
-		showNotification(title, message, imageBitmap, webPageUrl);
+		showNotification(title, message, webPageUrl);
 	}
 
-	private void showNotification(String title, String message, Bitmap image, String link) {
+	private void showNotification(String title, String message, String link) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -76,7 +71,6 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 
 		NotificationCompat.Builder notification = new NotificationCompat.Builder(this)
 				.setSmallIcon(R.drawable.ic_launcher)
-				.setLargeIcon(image)
 				.setContentTitle(title)
 				.setContentText(message)
 				.setAutoCancel(true)
