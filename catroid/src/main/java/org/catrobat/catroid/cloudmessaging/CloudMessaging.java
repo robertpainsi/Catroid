@@ -47,7 +47,7 @@ public class CloudMessaging {
 	private RemoteMessage remoteMessage;
 	private Map<String, String> dataPayload;
 	private static final String IMAGE_URL = "image";
-	private static final String WEB_PAGE_URL = "link";
+	public static final String WEB_PAGE_URL = "link";
 
 	public CloudMessaging(Context context, RemoteMessage remoteMessage) {
 		this.context = context;

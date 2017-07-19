@@ -65,10 +65,10 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 
 		Bitmap imageBitmap = cloudMessaging.getBitmap(imageUrl);
 
-		sendNotification(title, message, imageBitmap, webPageUrl);
+		showNotification(title, message, imageBitmap, webPageUrl);
 	}
 
-	private void sendNotification(String title, String message, Bitmap image, String link) {
+	private void showNotification(String title, String message, Bitmap image, String link) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
