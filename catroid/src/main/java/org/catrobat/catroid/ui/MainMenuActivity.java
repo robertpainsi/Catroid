@@ -117,7 +117,7 @@ public class MainMenuActivity extends BaseCastActivity implements OnLoadProjectC
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getUrlFromCloudMessage();
+		checkCloudMessage();
 		if (!Utils.checkForExternalStorageAvailableAndDisplayErrorIfNot(this)) {
 			return;
 		}
@@ -551,7 +551,7 @@ public class MainMenuActivity extends BaseCastActivity implements OnLoadProjectC
 		startActivityForResult(intent, PreStageActivity.REQUEST_RESOURCES_INIT);
 	}
 
-	private void getUrlFromCloudMessage() {
+	private void checkCloudMessage() {
 		if (getIntent().getExtras() != null && getIntent().getExtras().getString(CloudMessaging.WEB_PAGE_URL) != null) {
 			String link = getIntent().getExtras().getString(CloudMessaging.WEB_PAGE_URL);
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
