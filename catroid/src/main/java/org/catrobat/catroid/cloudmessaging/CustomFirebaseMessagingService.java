@@ -38,7 +38,6 @@ import org.catrobat.catroid.R;
 import org.catrobat.catroid.utils.StatusBarNotificationManager;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -82,5 +81,4 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(StatusBarNotificationManager.getUniqueNotificationId(), notification.build());
 	}
-
 }
