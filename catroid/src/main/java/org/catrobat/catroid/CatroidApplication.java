@@ -27,6 +27,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.parrot.freeflight.settings.ApplicationSettings;
 
 import org.catrobat.catroid.utils.CrashReporter;
@@ -47,6 +48,7 @@ public class CatroidApplication extends MultiDexApplication {
 		super.onCreate();
 		CrashReporter.initialize(this);
 		Log.d(TAG, "CatroidApplication onCreate");
+		Log.v(TAG, "Firebase Cloud Messaging Token : " + FirebaseInstanceId.getInstance().getToken());
 		settings = new ApplicationSettings(this);
 		CatroidApplication.context = getApplicationContext();
 	}

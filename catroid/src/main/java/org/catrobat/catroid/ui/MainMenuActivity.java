@@ -56,7 +56,6 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
@@ -125,8 +124,6 @@ public class MainMenuActivity extends BaseCastActivity implements OnLoadProjectC
 
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 		UtilUi.updateScreenWidthAndHeight(this);
-
-		Log.e(TAG, "Token : " + FirebaseInstanceId.getInstance().getToken());
 
 		if (STANDALONE_MODE) {
 			/*requestWindowFeature(Window.FEATURE_NO_TITLE);
