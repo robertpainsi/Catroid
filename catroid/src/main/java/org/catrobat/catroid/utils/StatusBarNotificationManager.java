@@ -149,7 +149,7 @@ public final class StatusBarNotificationManager {
 
 		data.setNotificationBuilder(notificationBuilder);
 		notificationDataMap.put(notificationId, data);
-
+		notificationId = getUniqueNotificationId();
 		return notificationId;
 	}
 
