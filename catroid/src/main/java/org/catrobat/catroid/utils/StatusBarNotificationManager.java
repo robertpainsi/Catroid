@@ -51,8 +51,9 @@ public final class StatusBarNotificationManager {
 	public static final String ACTION_CANCEL_UPLOAD = "cancel_upload";
 
 	private static final StatusBarNotificationManager INSTANCE = new StatusBarNotificationManager();
-
 	private static final AtomicInteger ATOMIC_INTEGER = new AtomicInteger(0);
+
+	private int notificationId = getId();
 	private SparseArray<NotificationData> notificationDataMap = new SparseArray<NotificationData>();
 	private Context context;
 	private NotificationManager notificationManager;
@@ -81,7 +82,7 @@ public final class StatusBarNotificationManager {
 		Intent uploadIntent = new Intent(context, MainMenuActivity.class);
 		uploadIntent.setAction(Intent.ACTION_MAIN);
 		uploadIntent = uploadIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, getId(), uploadIntent,
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, uploadIntent,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
 		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_stat, programName,
@@ -103,7 +104,7 @@ public final class StatusBarNotificationManager {
 		copyIntent.setAction(Intent.ACTION_MAIN).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 				.putExtra(EXTRA_PROJECT_NAME, programName);
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, getId(), copyIntent,
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, copyIntent,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
 		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_stat, programName,
@@ -125,7 +126,7 @@ public final class StatusBarNotificationManager {
 		downloadIntent.setAction(Intent.ACTION_MAIN).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 				.putExtra(EXTRA_PROJECT_NAME, programName);
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, getId(), downloadIntent,
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, downloadIntent,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
 		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_stat, programName,
@@ -147,9 +148,9 @@ public final class StatusBarNotificationManager {
 				.setOngoing(true).setContentIntent(doesNothingPendingIntent);
 
 		data.setNotificationBuilder(notificationBuilder);
-		notificationDataMap.put(getId(), data);
+		notificationDataMap.put(notificationId, data);
 
-		return getId();
+		return notificationId++;
 	}
 
 	public void showOrUpdateNotification(int id, int progressInPercent) {
@@ -248,7 +249,7 @@ public final class StatusBarNotificationManager {
 				openIntent.setAction(Intent.ACTION_MAIN).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 						.putExtra(EXTRA_PROJECT_NAME, bundle.getString("projectName"));
 
-				PendingIntent pendingIntent = PendingIntent.getActivity(context, getId(), openIntent,
+				PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, openIntent,
 						PendingIntent.FLAG_CANCEL_CURRENT);
 				notificationData.setPendingIntent(pendingIntent);
 				showOrUpdateNotification(id, MAXIMUM_PERCENT);
