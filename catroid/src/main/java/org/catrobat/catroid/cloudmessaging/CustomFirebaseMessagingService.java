@@ -80,7 +80,7 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 				.setContentIntent(pendingIntent);
 
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(StatusBarNotificationManager.getId(), notification.build());
+		notificationManager.notify(StatusBarNotificationManager.getUniqueNotificationId(), notification.build());
 	}
 
 }
