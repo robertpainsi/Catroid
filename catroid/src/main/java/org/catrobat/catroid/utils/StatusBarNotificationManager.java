@@ -40,6 +40,8 @@ import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.transfers.ProjectUploadService;
 import org.catrobat.catroid.ui.MainMenuActivity;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public final class StatusBarNotificationManager {
 	public static final String EXTRA_PROJECT_NAME = "projectName";
 	public static final int MAXIMUM_PERCENT = 100;
@@ -50,7 +52,7 @@ public final class StatusBarNotificationManager {
 
 	private static final StatusBarNotificationManager INSTANCE = new StatusBarNotificationManager();
 
-	private int notificationId;
+	private static final AtomicInteger ATOMIC_INTEGER = new AtomicInteger(0);
 	private SparseArray<NotificationData> notificationDataMap = new SparseArray<NotificationData>();
 	private Context context;
 	private NotificationManager notificationManager;
@@ -79,7 +81,7 @@ public final class StatusBarNotificationManager {
 		Intent uploadIntent = new Intent(context, MainMenuActivity.class);
 		uploadIntent.setAction(Intent.ACTION_MAIN);
 		uploadIntent = uploadIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, uploadIntent,
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, getId(), uploadIntent,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
 		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_stat, programName,
@@ -101,7 +103,7 @@ public final class StatusBarNotificationManager {
 		copyIntent.setAction(Intent.ACTION_MAIN).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 				.putExtra(EXTRA_PROJECT_NAME, programName);
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, copyIntent,
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, getId(), copyIntent,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
 		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_stat, programName,
@@ -123,7 +125,7 @@ public final class StatusBarNotificationManager {
 		downloadIntent.setAction(Intent.ACTION_MAIN).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 				.putExtra(EXTRA_PROJECT_NAME, programName);
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, downloadIntent,
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, getId(), downloadIntent,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
 		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_stat, programName,
@@ -145,9 +147,9 @@ public final class StatusBarNotificationManager {
 				.setOngoing(true).setContentIntent(doesNothingPendingIntent);
 
 		data.setNotificationBuilder(notificationBuilder);
-		notificationDataMap.put(notificationId, data);
+		notificationDataMap.put(getId(), data);
 
-		return notificationId++;
+		return getId();
 	}
 
 	public void showOrUpdateNotification(int id, int progressInPercent) {
@@ -246,7 +248,7 @@ public final class StatusBarNotificationManager {
 				openIntent.setAction(Intent.ACTION_MAIN).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 						.putExtra(EXTRA_PROJECT_NAME, bundle.getString("projectName"));
 
-				PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, openIntent,
+				PendingIntent pendingIntent = PendingIntent.getActivity(context, getId(), openIntent,
 						PendingIntent.FLAG_CANCEL_CURRENT);
 				notificationData.setPendingIntent(pendingIntent);
 				showOrUpdateNotification(id, MAXIMUM_PERCENT);
@@ -330,5 +332,9 @@ public final class StatusBarNotificationManager {
 			Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
 			sendBroadcast(it);
 		}
+	}
+
+	public static int getId() {
+		return ATOMIC_INTEGER.incrementAndGet();
 	}
 }
