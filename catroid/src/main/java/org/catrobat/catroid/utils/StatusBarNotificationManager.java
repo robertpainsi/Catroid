@@ -51,9 +51,9 @@ public final class StatusBarNotificationManager {
 	public static final String ACTION_CANCEL_UPLOAD = "cancel_upload";
 
 	private static final StatusBarNotificationManager INSTANCE = new StatusBarNotificationManager();
-	private static final AtomicInteger ATOMIC_INTEGER = new AtomicInteger(0);
+	private static final AtomicInteger UNIQUE_NOTIFICATION_ID_COUNTER = new AtomicInteger(0);
 
-	private int notificationId = getId();
+	private int notificationId = getUniqueNotificationId();
 	private SparseArray<NotificationData> notificationDataMap = new SparseArray<NotificationData>();
 	private Context context;
 	private NotificationManager notificationManager;
@@ -150,7 +150,7 @@ public final class StatusBarNotificationManager {
 		data.setNotificationBuilder(notificationBuilder);
 		notificationDataMap.put(notificationId, data);
 
-		return notificationId++;
+		return notificationId;
 	}
 
 	public void showOrUpdateNotification(int id, int progressInPercent) {
@@ -335,7 +335,7 @@ public final class StatusBarNotificationManager {
 		}
 	}
 
-	public static int getId() {
-		return ATOMIC_INTEGER.incrementAndGet();
+	public static int getUniqueNotificationId() {
+		return UNIQUE_NOTIFICATION_ID_COUNTER.incrementAndGet();
 	}
 }
