@@ -37,8 +37,6 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.utils.StatusBarNotificationManager;
 
-import java.util.ArrayList;
-
 public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 
 	public static final String TAG = CustomFirebaseMessagingService.class.getSimpleName();
@@ -46,18 +44,14 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 	@Override
 	public void onMessageReceived(RemoteMessage remoteMessage) {
 
-		CloudMessaging cloudMessaging = new CloudMessaging(remoteMessage);
+		CloudMessaging cloudMessaging = new CloudMessaging();
+		cloudMessaging.initialize(remoteMessage);
 
 		String title = cloudMessaging.getTitle();
 		String message = cloudMessaging.getMessage();
 		String webPageUrl = cloudMessaging.getWebPageUrl();
 
-		ArrayList<String> notificationData = new ArrayList<>();
-		notificationData.add(title);
-		notificationData.add(message);
-		notificationData.add(webPageUrl);
-
-		if (!cloudMessaging.isValidData(notificationData)) {
+		if (!cloudMessaging.isValidData()) {
 			return;
 		}
 
@@ -65,11 +59,12 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 	}
 
 	private void showNotification(String title, String message, String link) {
+
+		int notificationId = StatusBarNotificationManager.getUniqueNotificationId();
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 		Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
 		NotificationCompat.Builder notification = new NotificationCompat.Builder(this)
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setContentTitle(title)
@@ -77,8 +72,7 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 				.setAutoCancel(true)
 				.setSound(defaultSoundUri)
 				.setContentIntent(pendingIntent);
-
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(StatusBarNotificationManager.getUniqueNotificationId(), notification.build());
+		notificationManager.notify(notificationId, notification.build());
 	}
 }

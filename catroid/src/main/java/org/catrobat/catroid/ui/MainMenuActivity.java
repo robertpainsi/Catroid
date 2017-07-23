@@ -128,7 +128,7 @@ public class MainMenuActivity extends BaseCastActivity implements OnLoadProjectC
 		if (STANDALONE_MODE) {
 			/*requestWindowFeature(Window.FEATURE_NO_TITLE);
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-			WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
 			getActionBar().hide();
 			setContentView(R.layout.activity_main_menu_splashscreen);
 			unzipProgram();

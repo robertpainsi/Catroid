@@ -25,14 +25,12 @@ package org.catrobat.catroid.uiespresso.ui.activity;
 
 import android.app.Instrumentation;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.catrobat.catroid.cloudmessaging.CloudMessaging;
 import org.catrobat.catroid.ui.MainMenuActivity;
-import org.catrobat.catroid.uiespresso.util.BaseActivityInstrumentationRule;
 import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
@@ -59,7 +57,7 @@ public class MainMenuActivityTest {
 		Matcher<Intent> expectedIntent = allOf(hasAction(Intent.ACTION_VIEW), hasData(EXPECTED_URL));
 		intending(expectedIntent).respondWith(new Instrumentation.ActivityResult(0, null));
 		Intent intent = new Intent();
-		intent.putExtra(CloudMessaging.WEB_PAGE_URL,EXPECTED_URL);
+		intent.putExtra(CloudMessaging.WEB_PAGE_URL, EXPECTED_URL);
 		activityTestRule.launchActivity(intent);
 		intended(expectedIntent);
 		Intents.release();

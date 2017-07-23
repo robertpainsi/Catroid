@@ -51,7 +51,7 @@ public final class StatusBarNotificationManager {
 	public static final String ACTION_CANCEL_UPLOAD = "cancel_upload";
 
 	private static final StatusBarNotificationManager INSTANCE = new StatusBarNotificationManager();
-	private static final AtomicInteger UNIQUE_NOTIFICATION_ID_COUNTER = new AtomicInteger(0);
+	private static AtomicInteger uniqueNotificationIdCounter = new AtomicInteger(0);
 
 	private int notificationId = getUniqueNotificationId();
 	private SparseArray<NotificationData> notificationDataMap = new SparseArray<NotificationData>();
@@ -336,6 +336,9 @@ public final class StatusBarNotificationManager {
 	}
 
 	public static int getUniqueNotificationId() {
-		return UNIQUE_NOTIFICATION_ID_COUNTER.incrementAndGet();
+		if (uniqueNotificationIdCounter == null) {
+			uniqueNotificationIdCounter = new AtomicInteger(0);
+		}
+		return uniqueNotificationIdCounter.incrementAndGet();
 	}
 }

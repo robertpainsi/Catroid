@@ -25,42 +25,50 @@ package org.catrobat.catroid.cloudmessaging;
 
 import com.google.firebase.messaging.RemoteMessage;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 public class CloudMessaging {
 
 	private static final String TAG = CloudMessaging.class.getSimpleName();
 
-	private RemoteMessage remoteMessage;
-	private Map<String, String> dataPayload;
 	public static final String WEB_PAGE_URL = "link";
 
-	public CloudMessaging(RemoteMessage remoteMessage) {
-		this.remoteMessage = remoteMessage;
-		dataPayload = remoteMessage.getData();
+	private String title;
+	private String message;
+	private String url;
+
+	public void initialize(RemoteMessage remoteMessage) {
+		setNotificationTitle(remoteMessage.getNotification().getTitle());
+		setNotificationMessage(remoteMessage.getNotification().getBody());
+		setNotificationUrl(remoteMessage.getData().get(WEB_PAGE_URL));
 	}
 
 	public String getTitle() {
-		return remoteMessage.getNotification().getTitle();
+		return title;
 	}
 
 	public String getMessage() {
-		return remoteMessage.getNotification().getBody();
+		return message;
 	}
 
 	public String getWebPageUrl() {
-		return dataPayload.get(WEB_PAGE_URL);
+		return url;
 	}
 
-	public boolean isValidData(ArrayList<String> notificationData) {
+	public void setNotificationTitle(String title) {
+		this.title = title;
+	}
 
-		for (String data : notificationData) {
-			if (isStringNullOrEmpty(data)) {
-				return false;
-			}
+	public void setNotificationMessage(String message) {
+		this.message = message;
+	}
+
+	public void setNotificationUrl(String url) {
+		if (url.startsWith("http://") || url.startsWith("https://")) {
+			this.url = url;
 		}
-		return true;
+	}
+
+	public boolean isValidData() {
+		return !(isStringNullOrEmpty(getTitle()) || isStringNullOrEmpty(getMessage()) || isStringNullOrEmpty(getWebPageUrl()));
 	}
 
 	private boolean isStringNullOrEmpty(String string) {
