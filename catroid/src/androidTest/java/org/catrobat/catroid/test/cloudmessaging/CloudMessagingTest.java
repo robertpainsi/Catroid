@@ -29,15 +29,65 @@ import org.catrobat.catroid.cloudmessaging.CloudMessaging;
 
 public class CloudMessagingTest extends AndroidTestCase {
 
-	public void testAllRequiredFieldsAvailable() {
+	private CloudMessaging cloudMessaging;
 
-		CloudMessaging cloudMessaging = new CloudMessaging();
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		cloudMessaging = new CloudMessaging();
+	}
+
+	public void testAllRequiredFieldsAvailable() {
 
 		assertFalse(cloudMessaging.isValidData());
 
 		cloudMessaging.setNotificationTitle("Test Notification Title");
 		cloudMessaging.setNotificationMessage("Test Notification Message");
 		cloudMessaging.setNotificationUrl("https://www.catrobat.org/");
+
+		assertTrue(cloudMessaging.isValidData());
+	}
+
+	public void testRequiredFieldIsMissing() {
+
+		assertFalse(cloudMessaging.isValidData());
+
+		cloudMessaging.setNotificationTitle("Test Notification Title");
+
+		assertFalse(cloudMessaging.isValidData());
+
+		cloudMessaging.setNotificationMessage("Test Notification Message");
+		cloudMessaging.setNotificationUrl("https://www.catrobat.org/");
+
+		assertTrue(cloudMessaging.isValidData());
+	}
+
+	public void testRequiredFieldIsEmpty() {
+
+		assertFalse(cloudMessaging.isValidData());
+
+		cloudMessaging.setNotificationTitle("");
+
+		assertFalse(cloudMessaging.isValidData());
+
+		cloudMessaging.setNotificationTitle("Test Notification Title");
+		cloudMessaging.setNotificationMessage("Test Notification Message");
+		cloudMessaging.setNotificationUrl("https://www.catrobat.org/");
+
+		assertTrue(cloudMessaging.isValidData());
+	}
+
+	public void testRequiredFieldIsInValid() {
+
+		assertFalse(cloudMessaging.isValidData());
+
+		cloudMessaging.setNotificationTitle("Test Notification Title");
+		cloudMessaging.setNotificationMessage("Test Notification Message");
+		cloudMessaging.setNotificationUrl("htt0s://www.catrobat.org/");
+
+		assertFalse(cloudMessaging.isValidData());
+
+		cloudMessaging.setNotificationUrl("http://www.catrobat.org/");
 
 		assertTrue(cloudMessaging.isValidData());
 	}

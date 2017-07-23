@@ -60,7 +60,9 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 
 	private void showNotification(String title, String message, String link) {
 
-		int notificationId = StatusBarNotificationManager.getUniqueNotificationId();
+		StatusBarNotificationManager manager = StatusBarNotificationManager.getInstance();
+
+		int notificationId = manager.getUniqueNotificationId();
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
