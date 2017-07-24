@@ -23,6 +23,8 @@
 
 package org.catrobat.catroid.cloudmessaging;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.google.firebase.messaging.RemoteMessage;
 
 public class CloudMessaging {
@@ -33,7 +35,12 @@ public class CloudMessaging {
 	private String message;
 	private String url;
 
-	public void initialize(RemoteMessage remoteMessage) {
+	@VisibleForTesting
+	public CloudMessaging() {
+
+	}
+
+	public CloudMessaging(RemoteMessage remoteMessage) {
 		setNotificationTitle(remoteMessage.getNotification().getTitle());
 		setNotificationMessage(remoteMessage.getNotification().getBody());
 		setNotificationUrl(remoteMessage.getData().get(WEB_PAGE_URL));
