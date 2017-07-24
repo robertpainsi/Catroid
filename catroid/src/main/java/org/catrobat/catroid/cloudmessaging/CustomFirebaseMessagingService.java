@@ -44,16 +44,15 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 	@Override
 	public void onMessageReceived(RemoteMessage remoteMessage) {
 
-		CloudMessaging cloudMessaging = new CloudMessaging();
-		cloudMessaging.initialize(remoteMessage);
-
-		String title = cloudMessaging.getTitle();
-		String message = cloudMessaging.getMessage();
-		String webPageUrl = cloudMessaging.getWebPageUrl();
+		CloudMessaging cloudMessaging = new CloudMessaging(remoteMessage);
 
 		if (!cloudMessaging.isValidData()) {
 			return;
 		}
+
+		String title = cloudMessaging.getTitle();
+		String message = cloudMessaging.getMessage();
+		String webPageUrl = cloudMessaging.getWebPageUrl();
 
 		showNotification(title, message, webPageUrl);
 	}

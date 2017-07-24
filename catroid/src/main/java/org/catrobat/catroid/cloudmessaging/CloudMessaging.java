@@ -27,15 +27,13 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class CloudMessaging {
 
-	private static final String TAG = CloudMessaging.class.getSimpleName();
-
 	public static final String WEB_PAGE_URL = "link";
 
 	private String title;
 	private String message;
 	private String url;
 
-	public void initialize(RemoteMessage remoteMessage) {
+	public CloudMessaging(RemoteMessage remoteMessage) {
 		setNotificationTitle(remoteMessage.getNotification().getTitle());
 		setNotificationMessage(remoteMessage.getNotification().getBody());
 		setNotificationUrl(remoteMessage.getData().get(WEB_PAGE_URL));
