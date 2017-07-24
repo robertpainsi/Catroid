@@ -44,7 +44,8 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 	@Override
 	public void onMessageReceived(RemoteMessage remoteMessage) {
 
-		CloudMessaging cloudMessaging = new CloudMessaging(remoteMessage);
+		CloudMessaging cloudMessaging = new CloudMessaging();
+		cloudMessaging.initialize(remoteMessage);
 
 		if (!cloudMessaging.isValidData()) {
 			return;

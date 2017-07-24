@@ -33,7 +33,7 @@ public class CloudMessaging {
 	private String message;
 	private String url;
 
-	public CloudMessaging(RemoteMessage remoteMessage) {
+	public void initialize(RemoteMessage remoteMessage) {
 		setNotificationTitle(remoteMessage.getNotification().getTitle());
 		setNotificationMessage(remoteMessage.getNotification().getBody());
 		setNotificationUrl(remoteMessage.getData().get(WEB_PAGE_URL));
