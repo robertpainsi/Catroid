@@ -23,26 +23,17 @@
 
 package org.catrobat.catroid.cloudmessaging;
 
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
+import android.support.v4.app.NotificationCompat;
 
-import java.util.HashMap;
+public class NotificationBuilderProvider {
+	private Context context;
 
-public class NotificationsWrapper {
-	private final NotificationManager notificationManager;
-	private final CloudMessage cloudMessage;
-
-	public NotificationsWrapper(NotificationManager notificationManager, CloudMessage cloudMessage) {
-		this.notificationManager = notificationManager;
-		this.cloudMessage = cloudMessage;
+	public NotificationBuilderProvider(Context context) {
+		this.context = context;
 	}
 
-	public void showNotification(int id, HashMap<String, String> data, Context context) {
-
-		cloudMessage.showNotification(data, context);
-		Notification notification = cloudMessage.getNotification(data, context);
-
-		notificationManager.notify(id, notification);
+	public NotificationCompat.Builder get() {
+		return new NotificationCompat.Builder(context);
 	}
 }

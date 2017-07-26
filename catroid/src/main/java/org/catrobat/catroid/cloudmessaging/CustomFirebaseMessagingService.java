@@ -23,6 +23,7 @@
 
 package org.catrobat.catroid.cloudmessaging;
 
+import android.app.NotificationManager;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -36,23 +37,8 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 
 	@Override
 	public void onMessageReceived(RemoteMessage remoteMessage) {
-
-		CloudMessage cloudMessage = new CloudMessage(remoteMessage);
-
-		if (!cloudMessage.isValidData()) {
-			Log.d(TAG, "Invalid Data!");
-			return;
-		}
-
-		String title = cloudMessage.getTitle();
-		String message = cloudMessage.getMessage();
-		String webPageUrl = cloudMessage.getWebPageUrl();
-
-		HashMap<String, String> data = new HashMap<>();
-		data.put(CloudMessage.TITLE, title);
-		data.put(CloudMessage.MESSAGE, message);
-		data.put(CloudMessage.WEB_PAGE_URL, webPageUrl);
-
-		cloudMessage.showNotification(data, this);
+		CloudMessaging cloudMessaging = new CloudMessaging(this,
+				new NotificationBuilderProvider(this), (NotificationManager) getSystemService(NOTIFICATION_SERVICE));
+		cloudMessaging.showNotification(new CloudMessage(remoteMessage));
 	}
 }

@@ -28,7 +28,6 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 
 import org.catrobat.catroid.cloudmessaging.CloudMessage;
-import org.catrobat.catroid.cloudmessaging.NotificationsWrapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

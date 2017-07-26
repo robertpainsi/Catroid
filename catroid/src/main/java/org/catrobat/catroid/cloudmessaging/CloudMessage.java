@@ -93,40 +93,6 @@ public class CloudMessage {
 		return !(isStringNullOrEmpty(getTitle()) || isStringNullOrEmpty(getMessage()) || isStringNullOrEmpty(getWebPageUrl()));
 	}
 
-	public void showNotification(HashMap<String, String> data, Context context) {
-
-		StatusBarNotificationManager manager = StatusBarNotificationManager.getInstance();
-		int notificationId = manager.getUniqueNotificationId();
-
-		Notification notification = getNotification(data, context);
-
-		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(notificationId, notification);
-	}
-
-	public Notification getNotification(HashMap<String, String> data, Context context) {
-
-		String title = data.get(TITLE);
-		String message = data.get(MESSAGE);
-		String link = data.get(WEB_PAGE_URL);
-
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-		Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-		NotificationCompat.Builder notification = new NotificationCompat.Builder(context)
-				.setSmallIcon(R.drawable.ic_launcher)
-				.setContentTitle(title)
-				.setContentText(message)
-				.setAutoCancel(true)
-				.setSound(defaultSoundUri)
-				.setContentIntent(pendingIntent);
-
-		this.notification = notification.build();
-
-		return notification.build();
-	}
-
 	private boolean isStringNullOrEmpty(String string) {
 		return string == null || string.isEmpty();
 	}
