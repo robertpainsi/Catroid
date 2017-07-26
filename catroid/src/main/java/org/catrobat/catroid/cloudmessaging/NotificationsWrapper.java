@@ -23,36 +23,26 @@
 
 package org.catrobat.catroid.cloudmessaging;
 
-import android.util.Log;
-
-import com.google.firebase.messaging.FirebaseMessagingService;
-import com.google.firebase.messaging.RemoteMessage;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 
 import java.util.HashMap;
 
-public class CustomFirebaseMessagingService extends FirebaseMessagingService {
+public class NotificationsWrapper {
+	private final NotificationManager notificationManager;
+	private final CloudMessage cloudMessage;
 
-	public static final String TAG = CustomFirebaseMessagingService.class.getSimpleName();
+	public NotificationsWrapper(NotificationManager notificationManager, CloudMessage cloudMessage) {
+		this.notificationManager = notificationManager;
+		this.cloudMessage = cloudMessage;
+	}
 
-	@Override
-	public void onMessageReceived(RemoteMessage remoteMessage) {
+	public void showNotification(int id, HashMap<String, String> data, Context context) {
 
-		CloudMessage cloudMessage = new CloudMessage(remoteMessage);
+		cloudMessage.showNotification(data, context);
+		Notification notification = cloudMessage.getNotification(data, context);
 
-		if (!cloudMessage.isValidData()) {
-			Log.d(TAG, "Invalid Data!");
-			return;
-		}
-
-		String title = cloudMessage.getTitle();
-		String message = cloudMessage.getMessage();
-		String webPageUrl = cloudMessage.getWebPageUrl();
-
-		HashMap<String, String> data = new HashMap<>();
-		data.put(CloudMessage.TITLE, title);
-		data.put(CloudMessage.MESSAGE, message);
-		data.put(CloudMessage.WEB_PAGE_URL, webPageUrl);
-
-		cloudMessage.showNotification(data, this);
+		notificationManager.notify(id, notification);
 	}
 }

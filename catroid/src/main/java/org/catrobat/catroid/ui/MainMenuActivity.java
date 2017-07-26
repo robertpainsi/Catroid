@@ -61,7 +61,7 @@ import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.cast.CastManager;
-import org.catrobat.catroid.cloudmessaging.CloudMessaging;
+import org.catrobat.catroid.cloudmessaging.CloudMessage;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.formulaeditor.SensorHandler;
@@ -549,8 +549,8 @@ public class MainMenuActivity extends BaseCastActivity implements OnLoadProjectC
 	}
 
 	private void checkCloudMessage() {
-		if (getIntent().getExtras() != null && getIntent().getExtras().getString(CloudMessaging.WEB_PAGE_URL) != null) {
-			String link = getIntent().getExtras().getString(CloudMessaging.WEB_PAGE_URL);
+		if (getIntent().getExtras() != null && getIntent().getExtras().getString(CloudMessage.WEB_PAGE_URL) != null) {
+			String link = getIntent().getExtras().getString(CloudMessage.WEB_PAGE_URL);
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
 			if (isValidUrl(link) && intent.resolveActivity(getPackageManager()) != null) {
 				startActivity(intent);

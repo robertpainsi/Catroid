@@ -23,24 +23,41 @@
 
 package org.catrobat.catroid.cloudmessaging;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.RemoteMessage;
 
-public class CloudMessaging {
+import org.catrobat.catroid.R;
+import org.catrobat.catroid.utils.StatusBarNotificationManager;
 
+import java.util.HashMap;
+
+public class CloudMessage {
+
+	public static final String TITLE = "title";
+	public static final String MESSAGE = "message";
 	public static final String WEB_PAGE_URL = "link";
+
+	public Notification notification;
 
 	private String title;
 	private String message;
 	private String url;
 
 	@VisibleForTesting
-	public CloudMessaging() {
+	public CloudMessage() {
 
 	}
 
-	public CloudMessaging(RemoteMessage remoteMessage) {
+	public CloudMessage(RemoteMessage remoteMessage) {
 		setNotificationTitle(remoteMessage.getNotification().getTitle());
 		setNotificationMessage(remoteMessage.getNotification().getBody());
 		setNotificationUrl(remoteMessage.getData().get(WEB_PAGE_URL));
@@ -67,13 +84,47 @@ public class CloudMessaging {
 	}
 
 	public void setNotificationUrl(String url) {
-		if (url.startsWith("http://") || url.startsWith("https://")) {
+		if ((url.startsWith("http://") || url.startsWith("https://")) && url.contains(".")) {
 			this.url = url;
 		}
 	}
 
 	public boolean isValidData() {
 		return !(isStringNullOrEmpty(getTitle()) || isStringNullOrEmpty(getMessage()) || isStringNullOrEmpty(getWebPageUrl()));
+	}
+
+	public void showNotification(HashMap<String, String> data, Context context) {
+
+		StatusBarNotificationManager manager = StatusBarNotificationManager.getInstance();
+		int notificationId = manager.getUniqueNotificationId();
+
+		Notification notification = getNotification(data, context);
+
+		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.notify(notificationId, notification);
+	}
+
+	public Notification getNotification(HashMap<String, String> data, Context context) {
+
+		String title = data.get(TITLE);
+		String message = data.get(MESSAGE);
+		String link = data.get(WEB_PAGE_URL);
+
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+		Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		NotificationCompat.Builder notification = new NotificationCompat.Builder(context)
+				.setSmallIcon(R.drawable.ic_launcher)
+				.setContentTitle(title)
+				.setContentText(message)
+				.setAutoCancel(true)
+				.setSound(defaultSoundUri)
+				.setContentIntent(pendingIntent);
+
+		this.notification = notification.build();
+
+		return notification.build();
 	}
 
 	private boolean isStringNullOrEmpty(String string) {

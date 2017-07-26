@@ -25,70 +25,70 @@ package org.catrobat.catroid.test.cloudmessaging;
 
 import android.test.AndroidTestCase;
 
-import org.catrobat.catroid.cloudmessaging.CloudMessaging;
+import org.catrobat.catroid.cloudmessaging.CloudMessage;
 
 public class CloudMessagingTest extends AndroidTestCase {
 
-	private CloudMessaging cloudMessaging;
+	private CloudMessage cloudMessage;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		cloudMessaging = new CloudMessaging();
+		cloudMessage = new CloudMessage();
 	}
 
 	public void testAllRequiredFieldsAvailable() {
 
-		assertFalse(cloudMessaging.isValidData());
+		assertFalse(cloudMessage.isValidData());
 
-		cloudMessaging.setNotificationTitle("Test Notification Title");
-		cloudMessaging.setNotificationMessage("Test Notification Message");
-		cloudMessaging.setNotificationUrl("https://www.catrobat.org/");
+		cloudMessage.setNotificationTitle("Test Notification Title");
+		cloudMessage.setNotificationMessage("Test Notification Message");
+		cloudMessage.setNotificationUrl("https://www.catrobat.org/");
 
-		assertTrue(cloudMessaging.isValidData());
+		assertTrue(cloudMessage.isValidData());
 	}
 
 	public void testRequiredFieldIsMissing() {
 
-		assertFalse(cloudMessaging.isValidData());
+		assertFalse(cloudMessage.isValidData());
 
-		cloudMessaging.setNotificationTitle("Test Notification Title");
+		cloudMessage.setNotificationTitle("Test Notification Title");
 
-		assertFalse(cloudMessaging.isValidData());
+		assertFalse(cloudMessage.isValidData());
 
-		cloudMessaging.setNotificationMessage("Test Notification Message");
-		cloudMessaging.setNotificationUrl("https://www.catrobat.org/");
+		cloudMessage.setNotificationMessage("Test Notification Message");
+		cloudMessage.setNotificationUrl("https://www.catrobat.org/");
 
-		assertTrue(cloudMessaging.isValidData());
+		assertTrue(cloudMessage.isValidData());
 	}
 
 	public void testRequiredFieldIsEmpty() {
 
-		assertFalse(cloudMessaging.isValidData());
+		assertFalse(cloudMessage.isValidData());
 
-		cloudMessaging.setNotificationTitle("");
+		cloudMessage.setNotificationTitle("");
 
-		assertFalse(cloudMessaging.isValidData());
+		assertFalse(cloudMessage.isValidData());
 
-		cloudMessaging.setNotificationTitle("Test Notification Title");
-		cloudMessaging.setNotificationMessage("Test Notification Message");
-		cloudMessaging.setNotificationUrl("https://www.catrobat.org/");
+		cloudMessage.setNotificationTitle("Test Notification Title");
+		cloudMessage.setNotificationMessage("Test Notification Message");
+		cloudMessage.setNotificationUrl("https://www.catrobat.org/");
 
-		assertTrue(cloudMessaging.isValidData());
+		assertTrue(cloudMessage.isValidData());
 	}
 
 	public void testRequiredFieldIsInValid() {
 
-		assertFalse(cloudMessaging.isValidData());
+		assertFalse(cloudMessage.isValidData());
 
-		cloudMessaging.setNotificationTitle("Test Notification Title");
-		cloudMessaging.setNotificationMessage("Test Notification Message");
-		cloudMessaging.setNotificationUrl("htt0s://www.catrobat.org/");
+		cloudMessage.setNotificationTitle("Test Notification Title");
+		cloudMessage.setNotificationMessage("Test Notification Message");
+		cloudMessage.setNotificationUrl("htt0s://www.catrobat.org/");
 
-		assertFalse(cloudMessaging.isValidData());
+		assertFalse(cloudMessage.isValidData());
 
-		cloudMessaging.setNotificationUrl("http://www.catrobat.org/");
+		cloudMessage.setNotificationUrl("http://www.catrobat.org/");
 
-		assertTrue(cloudMessaging.isValidData());
+		assertTrue(cloudMessage.isValidData());
 	}
 }
