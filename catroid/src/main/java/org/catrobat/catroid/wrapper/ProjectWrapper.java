@@ -35,14 +35,11 @@ public class ProjectWrapper {
 	final Project project;
 	private final SceneWrapper firstScene;
 
-	public ProjectWrapper(Context context, String projectName) {
-		this(context, projectName, 0, 0);
-	}
-
-	public ProjectWrapper(Context context, String name, int width, int height) {
+	public ProjectWrapper(Context context, String name, String description, int width, int height) {
 		this.context = context;
 		project = new Project(context, name);
 		project.setDeviceData(context);
+		project.setDescription(description);
 
 		if (width > 0 && height > 0) {
 			setSize(width, height);
