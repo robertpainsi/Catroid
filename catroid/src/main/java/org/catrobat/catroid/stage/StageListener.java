@@ -452,6 +452,10 @@ public class StageListener implements ApplicationListener {
 		if (penActor != null) {
 			penActor.dispose();
 		}
+
+		project.updateMessageContainer();
+		BroadcastHandler.clearActionMaps();
+
 		finished = true;
 	}
 

@@ -216,6 +216,7 @@ public final class BroadcastHandler {
 		actionsToRestartMap.clear();
 		actionScriptMap.clear();
 		stringActionMap.clear();
+		scriptSpriteMap.clear();
 	}
 
 	public static Multimap<String, String> getActionsToRestartMap() {
