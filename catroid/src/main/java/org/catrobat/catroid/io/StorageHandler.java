@@ -233,6 +233,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.util.HashSet;
 import java.util.List;
@@ -240,6 +242,8 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static junit.framework.Assert.assertTrue;
 
@@ -563,26 +567,27 @@ public final class StorageHandler {
 	}
 
 	public String getFirstSceneName(String projectName) {
-		try {
-			if (!checkIfProjectHasScenes(projectName)) {
-				return null;
-			}
-		} catch (IOException e) {
-			Log.e(TAG, "Exception getFirstSceneName", e);
-			return null;
-		}
 		File projectXmlFile = new File(buildProjectPath(projectName), PROJECTCODE_NAME);
-		String projectXml;
 		try {
-			projectXml = Files.toString(projectXmlFile, Charsets.UTF_8);
-		} catch (IOException e) {
-			Log.e(TAG, "Exception getFirstSceneName", e);
-			return null;
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(projectXmlFile)));
+			try {
+				String line;
+				while ((line = reader.readLine()) != null) {
+					if (line.contains("<scene>")) {
+						line = reader.readLine();
+						Matcher matcher = Pattern.compile("<name>(.*)</name>").matcher(line);
+						if (matcher.find()) {
+							return matcher.group(1);
+						}
+					}
+				}
+			} finally {
+				reader.close();
+			}
+		} catch (IOException e){
+			Log.e(TAG, "getFirstSceneName", e);
 		}
-		int start = projectXml.indexOf("<scene>");
-		int end = projectXml.indexOf("</name>", start);
-		int lengthOfSceneAndNameTags = 20;
-		return projectXml.substring(start + lengthOfSceneAndNameTags, end);
+		return null;
 	}
 
 	public Project loadProject(String projectName, Context context) {
