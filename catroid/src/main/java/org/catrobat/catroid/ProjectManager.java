@@ -32,6 +32,7 @@ import org.catrobat.catroid.common.DefaultProjectHandler;
 import org.catrobat.catroid.common.LookData;
 import org.catrobat.catroid.common.ScreenModes;
 import org.catrobat.catroid.common.SoundInfo;
+import org.catrobat.catroid.content.CollisionScript;
 import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.content.Scene;
 import org.catrobat.catroid.content.Script;
@@ -169,6 +170,7 @@ public final class ProjectManager {
 
 		makeShallowCopiesDeepAgain(project);
 		checkNestingBrickReferences(true, false);
+		updateCollisionScriptSprite(project);
 
 		if (project.getCatrobatLanguageVersion() == Constants.CURRENT_CATROBAT_LANGUAGE_VERSION) {
 			localizeBackgroundSprite(context);
@@ -620,6 +622,23 @@ public final class ProjectManager {
 
 		for (Brick brick : bricksWithInvalidReferences) {
 			script.removeBrick(brick);
+		}
+	}
+
+	private void updateCollisionScriptSprite(Project project) {
+		for (Scene scene : project.getSceneList()) {
+			updateCollisionScriptSprite(scene);
+		}
+	}
+
+	public void updateCollisionScriptSprite(Scene scene) {
+		for (Sprite sprite : scene.getSpriteList()) {
+			for (Script script : sprite.getScriptList()) {
+				if (script instanceof CollisionScript) {
+					CollisionScript collisionScript = (CollisionScript) script;
+					collisionScript.updateSpriteToCollideWith(scene);
+				}
+			}
 		}
 	}
 

@@ -167,6 +167,8 @@ public class SpriteAttributesActivity extends BaseActivity implements
 		Sprite item = ProjectManager.getInstance().getCurrentSprite();
 		if (!item.getName().equals(name)) {
 			item.setName(name);
+			ProjectManager.getInstance().
+					updateCollisionScriptSprite(ProjectManager.getInstance().getCurrentlyEditedScene());
 		}
 		updateActionBarTitle();
 	}

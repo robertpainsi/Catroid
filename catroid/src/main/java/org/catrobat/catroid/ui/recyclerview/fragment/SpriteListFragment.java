@@ -275,6 +275,8 @@ public class SpriteListFragment extends RecyclerViewFragment<Sprite> {
 			spriteController.delete(item, currentScene);
 			adapter.remove(item);
 		}
+		ProjectManager.getInstance().
+				updateCollisionScriptSprite(ProjectManager.getInstance().getCurrentlyEditedScene());
 
 		ToastUtil.showSuccess(getActivity(), getResources().getQuantityString(R.plurals.deleted_sprites,
 				selectedItems.size(),
@@ -303,6 +305,8 @@ public class SpriteListFragment extends RecyclerViewFragment<Sprite> {
 		Sprite item = adapter.getSelectedItems().get(0);
 		if (!item.getName().equals(name)) {
 			item.setName(name);
+			ProjectManager.getInstance().
+					updateCollisionScriptSprite(ProjectManager.getInstance().getCurrentlyEditedScene());
 		}
 		finishActionMode();
 	}
