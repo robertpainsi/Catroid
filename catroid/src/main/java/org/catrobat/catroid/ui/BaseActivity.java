@@ -123,14 +123,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 	// onDestroy() and unbindDrawables() methods taken from
 	// http://stackoverflow.com/a/6779067
 	protected void unbindDrawables(View view) {
-		if (view.getBackground() != null) {
-			view.getBackground().setCallback(null);
-		}
-		if (view instanceof ViewGroup && !(view instanceof AdapterView)) {
-			for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-				unbindDrawables(((ViewGroup) view).getChildAt(i));
+		if (view != null) {
+			if (view.getBackground() != null) {
+				view.getBackground().setCallback(null);
 			}
-			((ViewGroup) view).removeAllViews();
+			if (view instanceof ViewGroup && !(view instanceof AdapterView)) {
+				for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+					unbindDrawables(((ViewGroup) view).getChildAt(i));
+				}
+				((ViewGroup) view).removeAllViews();
+			}
 		}
 	}
 }

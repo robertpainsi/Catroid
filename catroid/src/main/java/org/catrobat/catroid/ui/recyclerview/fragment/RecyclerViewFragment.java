@@ -204,6 +204,10 @@ public abstract class RecyclerViewFragment<T> extends Fragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstance) {
 		super.onActivityCreated(savedInstance);
+		if (getActivity().isFinishing()) {
+			return;
+		}
+
 		initializeAdapter();
 	}
 

@@ -66,6 +66,9 @@ public class SpriteActivity extends BaseActivity implements PlaySceneDialogFragm
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (isFinishing()) {
+			return;
+		}
 		SettingsFragment.setToChosenLanguage(this);
 
 		setContentView(R.layout.activity_recycler);
@@ -83,6 +86,7 @@ public class SpriteActivity extends BaseActivity implements PlaySceneDialogFragm
 		}
 
 		loadFragment(fragmentPosition);
+		throw new RuntimeException("Test");
 	}
 
 	private void updateActionBarTitle() {
