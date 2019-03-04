@@ -439,9 +439,6 @@ public class StageListener implements ApplicationListener {
 		if (CameraManager.getInstance() != null) {
 			CameraManager.getInstance().setToDefaultCamera();
 		}
-		if (penActor != null) {
-			penActor.dispose();
-		}
 
 		embroideryList = null;
 		finished = true;
@@ -613,8 +610,13 @@ public class StageListener implements ApplicationListener {
 		disposeStageButKeepActors();
 		font.dispose();
 		axes.dispose();
+
 		disposeTextures();
 		disposeClonedSprites();
+
+		if (penActor != null) {
+			penActor.dispose();
+		}
 	}
 
 	public boolean makeManualScreenshot() {
