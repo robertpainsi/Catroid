@@ -420,16 +420,10 @@ public class StageListener implements ApplicationListener {
 	}
 
 	public void finish() {
-		SoundManager.getInstance().clear();
-		PhysicsShapeBuilder.getInstance().reset();
 		if (CameraManager.getInstance() != null) {
 			CameraManager.getInstance().setToDefaultCamera();
 		}
-		if (penActor != null) {
-			penActor.dispose();
-		}
 
-		embroideryList = null;
 		finished = true;
 	}
 
@@ -589,8 +583,16 @@ public class StageListener implements ApplicationListener {
 		disposeStageButKeepActors();
 		font.dispose();
 		axes.dispose();
+
 		disposeTextures();
 		disposeClonedSprites();
+
+		SoundManager.getInstance().clear();
+		PhysicsShapeBuilder.getInstance().reset();
+		embroideryList = null;
+		if (penActor != null) {
+			penActor.dispose();
+		}
 	}
 
 	public boolean takeScreenshot(String screenshotName) {
