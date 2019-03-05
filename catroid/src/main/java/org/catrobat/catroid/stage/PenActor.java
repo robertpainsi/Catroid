@@ -122,10 +122,18 @@ public class PenActor extends Actor {
 	public void dispose() {
 		if (buffer != null) {
 			buffer.dispose();
+			long start = System.currentTimeMillis();
+			while (System.currentTimeMillis() < start + 50) {
+				;
+			}
 			buffer = null;
 		}
 		if (bufferBatch != null) {
 			bufferBatch.dispose();
+			long start = System.currentTimeMillis();
+			while (System.currentTimeMillis() < start + 50) {
+				;
+			}
 			bufferBatch = null;
 		}
 	}
