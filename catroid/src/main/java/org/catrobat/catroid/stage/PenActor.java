@@ -120,14 +120,14 @@ public class PenActor extends Actor {
 	}
 
 	public void dispose() {
-		if (buffer != null) {
+//		if (buffer != null) {
 			buffer.dispose();
-			buffer = null;
-		}
-		if (bufferBatch != null) {
+//			buffer = null;
+//		}
+//		if (bufferBatch != null) {
 			bufferBatch.dispose();
-			bufferBatch = null;
-		}
+//			bufferBatch = null;
+//		}
 	}
 
 	private float calculateScreenRatio() {

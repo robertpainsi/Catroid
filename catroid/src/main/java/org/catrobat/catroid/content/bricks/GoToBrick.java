@@ -54,6 +54,10 @@ public class GoToBrick extends BrickBaseType implements BrickSpinner.OnItemSelec
 		this.destinationSprite = destinationSprite;
 	}
 
+	public GoToBrick(int spinnerSelection) {
+		this.spinnerSelection = spinnerSelection;
+	}
+
 	@Override
 	public int getViewResource() {
 		return R.layout.brick_go_to;

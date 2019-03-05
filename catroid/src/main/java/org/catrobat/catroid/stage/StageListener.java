@@ -431,6 +431,11 @@ public class StageListener implements ApplicationListener {
 	}
 
 	public void finish() {
+		long start = System.currentTimeMillis();
+		while (System.currentTimeMillis() < start + 1000) {
+			;
+		}
+
 		SoundManager.getInstance().clear();
 		if (thumbnail != null && !makeAutomaticScreenshot) {
 			saveScreenshot(thumbnail, SCREENSHOT_AUTOMATIC_FILE_NAME);
