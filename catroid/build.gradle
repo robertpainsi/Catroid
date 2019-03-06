@@ -431,6 +431,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.reflections:reflections:0.9.11"
 
     androidTestImplementation fileTree(include: '*.jar', dir: 'src/androidTest/libs')
     androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
